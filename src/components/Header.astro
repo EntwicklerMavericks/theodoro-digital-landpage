@@ -4,8 +4,20 @@ import { config } from '../data/config';
 
 <header class="header" id="main-header">
   <div class="container header-content">
-    <a href="/" class="logo">
-      {config.brandName}<span class="logo-dot">.</span>
+    <a href="/" class="brand-container">
+      <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#a855f7" />
+          </linearGradient>
+        </defs>
+        <path d="M 47 14 L 53 14 L 53 80 L 50 88 L 47 80 Z M 41 14 L 5 14 L 10 20 L 41 20 Z M 41 25 L 15 25 L 20 31 L 35 31 L 35 59 L 41 75 Z M 59 14 L 95 14 L 90 20 L 59 20 Z M 59 25 L 85 25 L 80 31 L 65 31 L 65 59 L 59 75 Z" fill="url(#logo-gradient)"/>
+      </svg>
+      <div class="brand-text">
+        <span class="brand-name">THEODORO</span>
+        <span class="brand-sub">DIGITAL</span>
+      </div>
     </a>
     
     <button class="mobile-menu-toggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-nav">
@@ -58,25 +70,48 @@ import { config } from '../data/config';
     height: 70px;
   }
   
-  .logo {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #fff;
-    letter-spacing: -0.04em;
+  .brand-container {
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
   }
   
-  .logo-dot {
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+  
+  .brand-container:hover .brand-logo {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+  }
+  
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .brand-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  
+  .brand-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
     color: #a855f7;
-    font-size: 2rem;
-    line-height: 0;
-    animation: pulse 2s infinite;
-  }
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 1; text-shadow: 0 0 15px #a855f7; }
-    50% { opacity: 0.5; text-shadow: none; }
+    letter-spacing: 0.3em;
+    line-height: 1;
   }
   
   .nav {

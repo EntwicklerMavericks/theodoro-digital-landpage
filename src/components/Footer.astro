@@ -1,75 +1,140 @@
 ---
 import { config } from '../data/config';
-const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3>{config.brandName}</h3>
-        <p>Desenvolvimento de soluções digitais sob medida para empresas.</p>
+        <a href="/" class="brand-container">
+          <svg class="brand-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="footer-logo-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="100%" stop-color="#a855f7" />
+              </linearGradient>
+            </defs>
+            <path d="M 47 14 L 53 14 L 53 80 L 50 88 L 47 80 Z M 41 14 L 5 14 L 10 20 L 41 20 Z M 41 25 L 15 25 L 20 31 L 35 31 L 35 59 L 41 75 Z M 59 14 L 95 14 L 90 20 L 59 20 Z M 59 25 L 85 25 L 80 31 L 65 31 L 65 59 L 59 75 Z" fill="url(#footer-logo-gradient)"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">THEODORO</span>
+            <span class="brand-sub">DIGITAL</span>
+          </div>
+        </a>
+        <p class="brand-desc">Engenharia de software e design system premium para operações que precisam de escala, segurança e alta performance.</p>
+        
         <div class="social-links">
-          {config.socials.linkedin && <a href={config.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
-          {config.socials.github && <a href={config.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
+          <a href="#" aria-label="LinkedIn" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+          </a>
+          <a href="#" aria-label="Instagram" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+          </a>
+          <a href="#" aria-label="GitHub" class="social-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+          </a>
         </div>
       </div>
       
-      <div class="footer-links">
-        <h4>Serviços</h4>
-        <ul>
-          <li><a href="#solucoes">Presença Digital</a></li>
-          <li><a href="#solucoes">Sistemas Empresariais</a></li>
-          <li><a href="#solucoes">Automação</a></li>
+      <div class="footer-links-group">
+        <h3>Soluções</h3>
+        <ul class="footer-links">
+          <li><a href="#">Landing Pages</a></li>
+          <li><a href="#">E-commerce MERN</a></li>
+          <li><a href="#">Aplicativos Nativos</a></li>
+          <li><a href="#">ERPs e Sistemas de Gestão</a></li>
         </ul>
       </div>
       
-      <div class="footer-links">
-        <h4>Produtos</h4>
-        <ul>
-          <li><a href={config.products.nexa.url}>Nexa ERP</a></li>
-          <li><a href={config.products.alicerce.url}>Alicerce</a></li>
+      <div class="footer-links-group">
+        <h3>Empresa</h3>
+        <ul class="footer-links">
+          <li><a href="#sobre">Nossa Engenharia</a></li>
+          <li><a href="#metodologia">Metodologia</a></li>
+          <li><a href="#faq">Dúvidas Frequentes</a></li>
+          <li><a href="#orcamento">Contato</a></li>
         </ul>
-      </div>
-      
-      <div class="footer-contact">
-        <h4>Contato</h4>
-        <p><a href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
-        <p><a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {year} {config.brandName}. Todos os direitos reservados.</p>
-      <a href="/privacidade" class="privacy-link">Política de Privacidade</a>
+      <p>&copy; {new Date().getFullYear()} Theodoro Digital. Todos os direitos reservados.</p>
+      <div class="legal-links">
+        <a href="#">Termos de Uso</a>
+        <a href="#">Política de Privacidade</a>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    background-color: var(--color-bg-secondary);
-    padding: 4rem 0 2rem;
-    border-top: 1px solid var(--color-border);
+    background-color: #020202;
+    padding: 6rem 0 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
   }
   
   .footer-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 4rem;
     margin-bottom: 4rem;
   }
   
-  .footer-brand h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-text-main);
+  .brand-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    margin-bottom: 1.5rem;
   }
   
-  .footer-brand p {
-    color: var(--color-text-secondary);
-    margin-bottom: 1.5rem;
-    font-size: 0.95rem;
+  .brand-logo {
+    width: 35px;
+    height: 35px;
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.4));
+  }
+  
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .brand-name {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  
+  .brand-sub {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 600;
+    color: #a855f7;
+    letter-spacing: 0.3em;
+    line-height: 1;
+  }
+  
+  .brand-desc {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 400px;
   }
   
   .social-links {
@@ -77,35 +142,45 @@ const year = new Date().getFullYear();
     gap: 1rem;
   }
   
-  .social-links a {
-    color: var(--color-lavender-neon);
-    font-size: 0.9rem;
+  .social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #f8fafc;
+    transition: all 0.3s;
   }
   
-  .footer-links h4, .footer-contact h4 {
-    color: var(--color-text-main);
-    margin-bottom: 1.25rem;
+  .social-link:hover {
+    background-color: #a855f7;
+    transform: translateY(-3px);
+  }
+  
+  .footer-links-group h3 {
     font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: #f8fafc;
   }
   
-  .footer-links ul {
+  .footer-links {
+    list-style: none;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
   }
   
-  .footer-links a, .footer-contact a {
-    color: var(--color-text-secondary);
-    font-size: 0.95rem;
+  .footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
     transition: color 0.2s;
   }
   
-  .footer-links a:hover, .footer-contact a:hover {
-    color: var(--color-lavender-neon);
-  }
-  
-  .footer-contact p {
-    margin-bottom: 0.75rem;
+  .footer-links a:hover {
+    color: #a855f7;
   }
   
   .footer-bottom {
@@ -113,25 +188,30 @@ const year = new Date().getFullYear();
     justify-content: space-between;
     align-items: center;
     padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    font-size: 0.85rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    color: #64748b;
+    font-size: 0.9rem;
   }
   
-  .privacy-link {
-    color: var(--color-text-secondary);
+  .legal-links {
+    display: flex;
+    gap: 1.5rem;
   }
   
-  @media (max-width: 992px) {
-    .footer-grid {
-      grid-template-columns: 1fr 1fr;
-    }
+  .legal-links a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.2s;
   }
   
-  @media (max-width: 576px) {
+  .legal-links a:hover {
+    color: #f8fafc;
+  }
+  
+  @media (max-width: 768px) {
     .footer-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
     }
     
     .footer-bottom {
