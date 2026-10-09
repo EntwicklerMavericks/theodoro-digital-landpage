@@ -81,11 +81,22 @@ h2 {
   }
 }
 
-.text-gradient {
-  background: linear-gradient(90deg, var(--color-lavender-neon), var(--color-purple-neon));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.text-gradient,
+.gradient-text,
+.animated-gradient {
+  background: linear-gradient(90deg, #c084fc, #a855f7, #3b82f6, #a855f7) !important;
+  background-size: 200% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  display: inline-block !important;
+  animation: shine 4s linear infinite !important;
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
 }
 
 .btn-primary {
