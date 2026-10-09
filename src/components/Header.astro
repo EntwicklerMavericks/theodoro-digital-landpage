@@ -28,12 +28,21 @@ import { config } from '../data/config';
 
     <nav id="main-nav" class="nav">
       <ul class="nav-list">
-        <li><a href="#solucoes" class="nav-link">Soluções</a></li>
-        <li><a href="#metodologia" class="nav-link">Metodologia</a></li>
-        <li><a href="#sobre" class="nav-link">Engenharia</a></li>
+        <li><a href="#solucoes" class="nav-link" data-i18n="nav.solutions">Soluções</a></li>
+        <li><a href="#metodologia" class="nav-link" data-i18n="nav.methodology">Metodologia</a></li>
+        <li><a href="#sobre" class="nav-link" data-i18n="nav.engineering">Engenharia</a></li>
       </ul>
+      
+      <div class="lang-switcher" aria-label="Selecione o idioma">
+        <button class="lang-btn active" data-lang="pt" type="button">PT</button>
+        <span class="lang-divider">/</span>
+        <button class="lang-btn" data-lang="en" type="button">EN</button>
+        <span class="lang-divider">/</span>
+        <button class="lang-btn" data-lang="es" type="button">ES</button>
+      </div>
+
       <a href="#orcamento" class="btn-cyber-sm">
-        <span>Iniciar</span>
+        <span data-i18n="nav.cta">Iniciar</span>
       </a>
     </nav>
   </div>
@@ -153,6 +162,52 @@ import { config } from '../data/config';
   
   .nav-link:hover::after {
     width: 100%;
+  }
+
+  /* Language Switcher */
+  .lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50px;
+    padding: 3px 8px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .lang-switcher:hover {
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.15);
+  }
+
+  .lang-btn {
+    background: transparent;
+    border: none;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 3px 6px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.25s ease;
+  }
+
+  .lang-btn:hover {
+    color: #fff;
+  }
+
+  .lang-btn.active {
+    color: #fff;
+    background: rgba(168, 85, 247, 0.25);
+    box-shadow: 0 0 8px rgba(168, 85, 247, 0.4);
+  }
+
+  .lang-divider {
+    color: rgba(255, 255, 255, 0.15);
+    font-size: 0.7rem;
+    user-select: none;
   }
   
   .btn-cyber-sm {

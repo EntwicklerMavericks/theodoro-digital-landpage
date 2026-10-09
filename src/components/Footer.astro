@@ -21,7 +21,7 @@ import { config } from '../data/config';
             <span class="brand-sub">DIGITAL</span>
           </div>
         </a>
-        <p class="brand-desc">Engenharia de software e design system premium para operações que precisam de escala, segurança e alta performance.</p>
+        <p class="brand-desc" data-i18n="footer.desc">Engenharia de software e design system premium para operações que precisam de escala, segurança e alta performance.</p>
         
         <div class="social-links">
           <a href={config.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-link" title="LinkedIn">
@@ -52,31 +52,31 @@ import { config } from '../data/config';
       </div>
       
       <div class="footer-links-group">
-        <h3>Soluções</h3>
+        <h3 data-i18n="footer.col1Title">Soluções</h3>
         <ul class="footer-links">
-          <li><a href="#">Landing Pages</a></li>
-          <li><a href="#">E-commerce MERN</a></li>
-          <li><a href="#">Aplicativos Nativos</a></li>
-          <li><a href="#">ERPs e Sistemas de Gestão</a></li>
+          <li><a href="#solucoes">Landing Pages</a></li>
+          <li><a href="#solucoes">E-commerce MERN</a></li>
+          <li><a href="#solucoes">Aplicativos Nativos</a></li>
+          <li><a href="#solucoes">ERPs e Sistemas de Gestão</a></li>
         </ul>
       </div>
       
       <div class="footer-links-group">
-        <h3>Empresa</h3>
+        <h3 data-i18n="footer.col2Title">Empresa</h3>
         <ul class="footer-links">
-          <li><a href="#sobre">Nossa Engenharia</a></li>
-          <li><a href="#metodologia">Metodologia</a></li>
-          <li><a href="#faq">Dúvidas Frequentes</a></li>
-          <li><a href="#orcamento">Contato</a></li>
+          <li><a href="#sobre" data-i18n="nav.engineering">Nossa Engenharia</a></li>
+          <li><a href="#metodologia" data-i18n="nav.methodology">Metodologia</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#orcamento">WhatsApp</a></li>
         </ul>
       </div>
     </div>
     
     <div class="footer-bottom">
-      <p>&copy; {new Date().getFullYear()} Theodoro Digital. Todos os direitos reservados.</p>
+      <p>&copy; {new Date().getFullYear()} Theodoro Digital. <span data-i18n="footer.rights">Todos os direitos reservados.</span></p>
       <div class="legal-links">
-        <a href="#">Termos de Uso</a>
-        <a href="#">Política de Privacidade</a>
+        <a href="#" data-i18n="footer.terms">Termos de Uso</a>
+        <a href="#" data-i18n="footer.privacy">Política de Privacidade</a>
       </div>
     </div>
   </div>

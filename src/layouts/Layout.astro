@@ -1,5 +1,6 @@
 ---
 import { config } from '../data/config';
+import { translations } from '../data/translations';
 import '../styles/global.css';
 
 interface Props {
@@ -36,7 +37,8 @@ const {
 	<body>
 		<slot />
 		
-		<script>
+		<!-- Core Scroll Reveal -->
+		<script is:inline>
 		  document.addEventListener('DOMContentLoaded', () => {
 		    const observerOptions = {
 		      root: null,
@@ -53,11 +55,81 @@ const {
 		      });
 		    }, observerOptions);
 		    
-		    // Adicionar classe reveal a todas as seções, exceto a primeira
 		    const sections = document.querySelectorAll('main > section:not(:first-child)');
 		    sections.forEach(section => {
 		      section.classList.add('reveal');
 		      observer.observe(section);
+		    });
+		  });
+		</script>
+
+		<!-- Multi-Language (i18n) Engine -->
+		<script is:inline define:vars={{ translationsData: translations }}>
+		  window.__TRANSLATIONS = translationsData;
+		  
+		  function getNested(obj, path) {
+		    return path.split('.').reduce((acc, part) => (acc ? acc[part] : undefined), obj);
+		  }
+		  
+		  window.__setLanguage = function(lang) {
+		    if (!window.__TRANSLATIONS || !window.__TRANSLATIONS[lang]) return;
+		    
+		    try {
+		      localStorage.setItem('theodoro_lang', lang);
+		    } catch(e) {}
+		    
+		    document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+		    
+		    // Update language switcher active states
+		    document.querySelectorAll('.lang-btn').forEach(btn => {
+		      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+		    });
+		    
+		    const t = window.__TRANSLATIONS[lang];
+		    
+		    // Translate inner text and HTML
+		    document.querySelectorAll('[data-i18n]').forEach(el => {
+		      const key = el.getAttribute('data-i18n');
+		      const val = getNested(t, key);
+		      if (val !== undefined && typeof val === 'string') {
+		        if (val.includes('<') || el.hasAttribute('data-i18n-html')) {
+		          el.innerHTML = val;
+		        } else {
+		          el.textContent = val;
+		        }
+		      }
+		    });
+		    
+		    // Translate placeholder attributes
+		    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+		      const key = el.getAttribute('data-i18n-placeholder');
+		      const val = getNested(t, key);
+		      if (val !== undefined && typeof val === 'string') {
+		        el.setAttribute('placeholder', val);
+		      }
+		    });
+		    
+		    // Broadcast language change to dynamic components
+		    window.dispatchEvent(new CustomEvent('languageChange', { detail: { lang, t } }));
+		  };
+
+		  document.addEventListener('DOMContentLoaded', () => {
+		    let initialLang = 'pt';
+		    try {
+		      const stored = localStorage.getItem('theodoro_lang');
+		      if (stored && (stored === 'pt' || stored === 'en' || stored === 'es')) {
+		        initialLang = stored;
+		      }
+		    } catch(e) {}
+		    
+		    window.__setLanguage(initialLang);
+		    
+		    // Bind switcher buttons
+		    document.querySelectorAll('.lang-btn').forEach(btn => {
+		      btn.addEventListener('click', () => {
+		        const lang = btn.getAttribute('data-lang');
+		        if (lang) window.__setLanguage(lang);
+		      });
 		    });
 		  });
 		</script>

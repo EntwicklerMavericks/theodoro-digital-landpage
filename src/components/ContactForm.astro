@@ -6,12 +6,12 @@ import { config } from '../data/config';
   <div class="container">
     <div class="contact-wrapper">
       <div class="contact-info">
-        <h2>Faça seu orçamento <span class="text-gradient">sem compromisso.</span></h2>
-        <p>Conte um pouco sobre o que você precisa. Vamos entender sua ideia e conversar sobre a melhor solução para o seu negócio.</p>
+        <h2 data-i18n="contact.title" data-i18n-html>Faça seu orçamento <span class="text-gradient">sem compromisso.</span></h2>
+        <p data-i18n="contact.description">Conte um pouco sobre o que você precisa. Vamos entender sua ideia e conversar sobre a melhor solução para o seu negócio.</p>
         
         <div class="direct-contact">
-          <p>Prefere chamar direto?</p>
-          <a href={`https://wa.me/${config.contact.whatsappDirect}?text=${encodeURIComponent("Olá! Vim pelo site da Theodoro Digital e gostaria de conversar.")}`} target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <p data-i18n="contact.directTitle">Prefere chamar direto?</p>
+          <a href={`https://wa.me/${config.contact.whatsappDirect}?text=${encodeURIComponent("Olá! Vim pelo site da Theodoro Digital e gostaria de conversar.")}`} target="_blank" rel="noopener noreferrer" class="btn-secondary" data-i18n="contact.directBtn">
             Falar diretamente pelo WhatsApp
           </a>
         </div>
@@ -20,26 +20,26 @@ import { config } from '../data/config';
       <div class="contact-form-container">
         <form id="wa-form" class="wa-form">
           <div class="form-group">
-            <label for="name">Nome *</label>
-            <input type="text" id="name" name="name" required placeholder="Seu nome" />
-            <span class="error-msg">Por favor, informe seu nome.</span>
+            <label for="name" data-i18n="contact.nameLabel">Nome *</label>
+            <input type="text" id="name" name="name" required placeholder="Seu nome" data-i18n-placeholder="contact.namePlaceholder" />
+            <span class="error-msg" data-i18n="contact.errorName">Por favor, informe seu nome.</span>
           </div>
           
           <div class="form-group">
-            <label for="company">Nome da empresa (opcional)</label>
-            <input type="text" id="company" name="company" placeholder="Sua empresa" />
+            <label for="company" data-i18n="contact.companyLabel">Nome da empresa (opcional)</label>
+            <input type="text" id="company" name="company" placeholder="Sua empresa" data-i18n-placeholder="contact.companyPlaceholder" />
           </div>
           
           <div class="form-group">
-            <label for="phone">WhatsApp para contato *</label>
-            <input type="tel" id="phone" name="phone" required placeholder="(00) 00000-0000" />
-            <span class="error-msg">Por favor, informe um WhatsApp válido.</span>
+            <label for="phone" data-i18n="contact.phoneLabel">WhatsApp para contato *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="(00) 00000-0000" data-i18n-placeholder="contact.phonePlaceholder" />
+            <span class="error-msg" data-i18n="contact.errorPhone">Por favor, informe um WhatsApp válido.</span>
           </div>
           
           <div class="form-group">
-            <label for="service">Tipo de serviço desejado *</label>
+            <label for="service" data-i18n="contact.serviceLabel">Tipo de serviço desejado *</label>
             <select id="service" name="service" required>
-              <option value="" disabled selected>Selecione uma opção...</option>
+              <option value="" disabled selected data-i18n="contact.servicePlaceholder">Selecione uma opção...</option>
               <option value="Criação de site">Criação de site</option>
               <option value="Landing page">Landing page</option>
               <option value="Página de vendas ou captura de leads">Página de vendas ou captura de leads</option>
@@ -49,18 +49,17 @@ import { config } from '../data/config';
               <option value="Integração entre sistemas">Integração entre sistemas</option>
               <option value="Manutenção ou melhoria de sistema existente">Manutenção ou melhoria de sistema existente</option>
               <option value="Consultoria tecnológica">Consultoria tecnológica</option>
-              <option value="Divulgação ou interesse em produto digital">Divulgação ou interesse em produto digital</option>
               <option value="Outro / Ainda não sei qual solução preciso">Outro / Ainda não sei qual solução preciso</option>
             </select>
-            <span class="error-msg">Por favor, selecione um serviço.</span>
+            <span class="error-msg" data-i18n="contact.errorService">Por favor, selecione um serviço.</span>
           </div>
           
           <div class="form-group">
-            <label for="description">Descrição da necessidade (opcional)</label>
-            <textarea id="description" name="description" rows="4" placeholder="Conte-nos um pouco sobre o seu projeto..."></textarea>
+            <label for="description" data-i18n="contact.descLabel">Descrição da necessidade (opcional)</label>
+            <textarea id="description" name="description" rows="4" placeholder="Conte-nos um pouco sobre o seu projeto..." data-i18n-placeholder="contact.descPlaceholder"></textarea>
           </div>
           
-          <button type="submit" class="btn-primary btn-block" data-wa={config.contact.whatsappForm}>
+          <button type="submit" class="btn-primary btn-block" data-wa={config.contact.whatsappForm} data-i18n="contact.submitBtn">
             Solicitar orçamento pelo WhatsApp
           </button>
         </form>
@@ -263,22 +262,35 @@ import { config } from '../data/config';
       
       if (isValid) {
         const waNumber = form.querySelector('button')?.getAttribute('data-wa');
+        let lang = 'pt';
+        try { lang = localStorage.getItem('theodoro_lang') || 'pt'; } catch(e) {}
         
-        let message = `Olá! Gostaria de solicitar um orçamento sem compromisso.\n\n`;
-        message += `*Nome:* ${name.value.trim()}\n`;
-        
-        if (company.value.trim()) {
-          message += `*Empresa:* ${company.value.trim()}\n`;
+        let message = '';
+        if (lang === 'en') {
+          message = `Hello! I would like to request a custom software proposal.\n\n`;
+          message += `*Name:* ${name.value.trim()}\n`;
+          if (company.value.trim()) message += `*Company:* ${company.value.trim()}\n`;
+          message += `*Contact:* ${phone.value.trim()}\n`;
+          message += `*Required Service:* ${service.value}\n\n`;
+          if (description.value.trim()) message += `*Project Details:*\n${description.value.trim()}\n\n`;
+          message += `I'd like to schedule a conversation to discuss the scope and receive a proposal.`;
+        } else if (lang === 'es') {
+          message = `¡Hola! Me gustaría solicitar un presupuesto sin compromiso.\n\n`;
+          message += `*Nombre:* ${name.value.trim()}\n`;
+          if (company.value.trim()) message += `*Empresa:* ${company.value.trim()}\n`;
+          message += `*WhatsApp / Contacto:* ${phone.value.trim()}\n`;
+          message += `*Servicio de interés:* ${service.value}\n\n`;
+          if (description.value.trim()) message += `*Detalles de la necesidad:*\n${description.value.trim()}\n\n`;
+          message += `Me gustaría conversar para evaluar las posibilidades y recibir una propuesta.`;
+        } else {
+          message = `Olá! Gostaria de solicitar um orçamento sem compromisso.\n\n`;
+          message += `*Nome:* ${name.value.trim()}\n`;
+          if (company.value.trim()) message += `*Empresa:* ${company.value.trim()}\n`;
+          message += `*WhatsApp para contato:* ${phone.value.trim()}\n`;
+          message += `*Serviço de interesse:* ${service.value}\n\n`;
+          if (description.value.trim()) message += `*Descrição da necessidade:*\n${description.value.trim()}\n\n`;
+          message += `Gostaria de conversar para entender as possibilidades e receber uma proposta.`;
         }
-        
-        message += `*WhatsApp para contato:* ${phone.value.trim()}\n`;
-        message += `*Serviço de interesse:* ${service.value}\n\n`;
-        
-        if (description.value.trim()) {
-          message += `*Descrição da necessidade:*\n${description.value.trim()}\n\n`;
-        }
-        
-        message += `Gostaria de conversar para entender as possibilidades e receber uma proposta.`;
         
         const encodedMessage = encodeURIComponent(message);
         const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;

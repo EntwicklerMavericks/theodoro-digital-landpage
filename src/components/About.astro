@@ -5,30 +5,30 @@
   <div class="container">
     <div class="about-grid">
       <div class="about-content">
-        <div class="badge">A ENGENHARIA</div>
-        <h2>Sistemas construídos para <span class="text-gradient animated-gradient">performance e escala.</span></h2>
+        <div class="badge" data-i18n="about.badge">A ENGENHARIA</div>
+        <h2 data-i18n="about.title" data-i18n-html>Sistemas construídos para <span class="text-gradient animated-gradient">performance e escala.</span></h2>
         
         <div class="about-text">
-          <p>O mercado está saturado de soluções lentas e agências que dependem de templates genéricos. Atuamos como o <strong>braço de engenharia tecnológica</strong> do seu negócio.</p>
-          <p>Seja para modernizar uma operação travada, lançar um produto digital imbatível ou automatizar processos internos, aplicamos os mesmos padrões de segurança e arquitetura utilizados por grandes players de tecnologia.</p>
+          <p data-i18n="about.p1" data-i18n-html>O mercado está saturado de soluções lentas e agências que dependem de templates genéricos. Atuamos como o <strong>braço de engenharia tecnológica</strong> do seu negócio.</p>
+          <p data-i18n="about.p2">Seja para modernizar uma operação travada, lançar um produto digital imbatível ou automatizar processos internos, aplicamos os mesmos padrões de segurança e arquitetura utilizados por grandes players de tecnologia.</p>
         </div>
         
         <div class="tech-stack">
           <div class="stack-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Arquitetura Resiliente
+            <span data-i18n="about.stack1">Arquitetura Resiliente</span>
           </div>
           <div class="stack-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            UI/UX Premium
+            <span data-i18n="about.stack2">UI/UX Premium</span>
           </div>
           <div class="stack-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Código Escalável
+            <span data-i18n="about.stack3">Código Escalável</span>
           </div>
           <div class="stack-item">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            Deploy Contínuo
+            <span data-i18n="about.stack4">Deploy Contínuo</span>
           </div>
         </div>
       </div>
@@ -39,15 +39,15 @@
             <div class="dots">
               <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
             </div>
-            <div class="terminal-title">guest@theodoro-digital: ~</div>
+            <div class="terminal-title" id="terminal-title-text" data-i18n="about.terminalHeader">visitante@theodoro-digital: ~</div>
           </div>
           <div class="window-body" id="interactive-terminal" tabindex="0">
             <div id="terminal-output">
-              <div class="line output success">TheodoroOS v2.0.4 - System Initialized</div>
-              <div class="line output">Type 'help' to see available commands. Click here to type.</div>
+              <div class="line output success" id="term-line-init" data-i18n="about.terminalInit">TheodoroOS v2.0.4 - Sistema Inicializado</div>
+              <div class="line output" id="term-line-help" data-i18n="about.terminalHelpPrompt">Digite 'ajuda' ou 'help' para ver os comandos disponíveis. Clique aqui para digitar.</div>
             </div>
             <div class="terminal-input-line">
-              <span class="prompt">guest@theodoro:~$</span> 
+              <span class="prompt" id="term-prompt" data-i18n="about.terminalPromptUser">visitante@theodoro:~$</span> 
               <span id="terminal-current-input"></span><div class="cursor"></div>
             </div>
             <input type="text" id="terminal-hidden-input" autocomplete="off" spellcheck="false" />
@@ -56,12 +56,12 @@
         
         <div class="floating-badge badge-1">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          Security Grade A
+          <span data-i18n="about.badge1">Segurança Nível A</span>
         </div>
         
         <div class="floating-badge badge-2">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          Zero Latency
+          <span data-i18n="about.badge2">Latência Zero</span>
         </div>
       </div>
     </div>
@@ -332,35 +332,45 @@
     const hiddenInput = document.getElementById('terminal-hidden-input');
     const currentInputDisplay = document.getElementById('terminal-current-input');
     const outputArea = document.getElementById('terminal-output');
+    const promptDisplay = document.getElementById('term-prompt');
     
     if (!terminal || !hiddenInput || !currentInputDisplay || !outputArea) return;
 
-    // Focus hidden input when clicking anywhere on the terminal window
+    let currentLang = 'pt';
+    try {
+      currentLang = localStorage.getItem('theodoro_lang') || 'pt';
+    } catch(e) {}
+
+    window.addEventListener('languageChange', (e) => {
+      if (e.detail && e.detail.lang) {
+        currentLang = e.detail.lang;
+        if (promptDisplay) {
+          promptDisplay.textContent = currentLang === 'pt' ? 'visitante@theodoro:~$' : (currentLang === 'es' ? 'invitado@theodoro:~$' : 'guest@theodoro:~$');
+        }
+      }
+    });
+
     terminal.addEventListener('click', () => {
       hiddenInput.focus();
     });
 
-    // Update visible text when typing
     hiddenInput.addEventListener('input', (e) => {
       currentInputDisplay.textContent = e.target.value;
       terminal.scrollTop = terminal.scrollHeight;
     });
 
-    // Handle command execution
     hiddenInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter') {
         const cmd = hiddenInput.value.trim();
+        const pText = promptDisplay ? promptDisplay.textContent : 'visitante@theodoro:~$';
         
-        // Print the command that was typed
         const cmdLine = document.createElement('div');
         cmdLine.className = 'line';
-        cmdLine.innerHTML = `<span class="prompt">guest@theodoro:~$</span> <span class="cmd">${cmd}</span>`;
+        cmdLine.innerHTML = `<span class="prompt">${pText}</span> <span class="cmd">${cmd}</span>`;
         outputArea.appendChild(cmdLine);
         
-        // Execute logic
         executeCommand(cmd.toLowerCase());
         
-        // Clear input
         hiddenInput.value = '';
         currentInputDisplay.textContent = '';
         terminal.scrollTop = terminal.scrollHeight;
@@ -378,51 +388,133 @@
       if (!cmd) return;
       
       switch(cmd) {
+        case 'ajuda':
         case 'help':
-          printOutput('Comandos disponíveis:');
-          printOutput('&nbsp;&nbsp;<b>about</b>&nbsp;&nbsp;&nbsp;&nbsp;- Descubra quem somos');
-          printOutput('&nbsp;&nbsp;<b>stack</b>&nbsp;&nbsp;&nbsp;&nbsp;- Lista de tecnologias utilizadas');
-          printOutput('&nbsp;&nbsp;<b>contact</b>&nbsp;&nbsp;- Como falar conosco');
-          printOutput('&nbsp;&nbsp;<b>clear</b>&nbsp;&nbsp;&nbsp;&nbsp;- Limpa a tela do terminal');
-          printOutput('&nbsp;&nbsp;<b>sudo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [ACESSO RESTRITO]');
+        case 'ayuda':
+          if (currentLang === 'en') {
+            printOutput('Available commands:');
+            printOutput('&nbsp;&nbsp;<b>about</b>&nbsp;&nbsp;&nbsp;&nbsp;- Discover who we are');
+            printOutput('&nbsp;&nbsp;<b>stack</b>&nbsp;&nbsp;&nbsp;&nbsp;- Tech stack and tools');
+            printOutput('&nbsp;&nbsp;<b>contact</b>&nbsp;&nbsp;- How to reach us');
+            printOutput('&nbsp;&nbsp;<b>clear</b>&nbsp;&nbsp;&nbsp;&nbsp;- Clear the terminal');
+            printOutput('&nbsp;&nbsp;<b>sudo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [RESTRICTED ACCESS]');
+          } else if (currentLang === 'es') {
+            printOutput('Comandos disponibles:');
+            printOutput('&nbsp;&nbsp;<b>sobre</b>&nbsp;&nbsp;&nbsp;&nbsp;- Conozca quiénes somos');
+            printOutput('&nbsp;&nbsp;<b>stack</b>&nbsp;&nbsp;&nbsp;&nbsp;- Tecnologías y herramientas');
+            printOutput('&nbsp;&nbsp;<b>contacto</b>&nbsp;- Cómo contactarnos');
+            printOutput('&nbsp;&nbsp;<b>limpiar</b>&nbsp;&nbsp;- Limpiar la terminal');
+            printOutput('&nbsp;&nbsp;<b>sudo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [ACCESO RESTRINGIDO]');
+          } else {
+            printOutput('Comandos disponíveis:');
+            printOutput('&nbsp;&nbsp;<b>sobre</b>&nbsp;&nbsp;&nbsp;&nbsp;- Descubra quem somos');
+            printOutput('&nbsp;&nbsp;<b>stack</b>&nbsp;&nbsp;&nbsp;&nbsp;- Tecnologias utilizadas');
+            printOutput('&nbsp;&nbsp;<b>contato</b>&nbsp;&nbsp;- Como falar conosco');
+            printOutput('&nbsp;&nbsp;<b>limpar</b>&nbsp;&nbsp;&nbsp;- Limpa a tela do terminal');
+            printOutput('&nbsp;&nbsp;<b>sudo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [ACESSO RESTRITO]');
+          }
           break;
           
+        case 'sobre':
         case 'about':
-          printOutput('Theodoro Digital é uma operação boutique de engenharia de software.', 'success');
-          printOutput('Nós não usamos templates prontos. Nós construímos infraestrutura tecnológica sob medida para empresas que precisam escalar.');
+          if (currentLang === 'en') {
+            printOutput('Theodoro Digital is a boutique software engineering studio.', 'success');
+            printOutput('We build zero-compromise technological infrastructure for businesses scaling with speed and security.');
+          } else if (currentLang === 'es') {
+            printOutput('Theodoro Digital es un estudio boutique de ingeniería de software.', 'success');
+            printOutput('Construimos infraestructura tecnológica a medida para empresas que necesitan escalar con seguridad.');
+          } else {
+            printOutput('Theodoro Digital é uma operação boutique de engenharia de software.', 'success');
+            printOutput('Nós não usamos templates prontos. Nós construímos infraestrutura tecnológica sob medida para empresas que precisam escalar.');
+          }
           break;
           
         case 'stack':
-          printOutput('Nossa stack de alta performance:');
-          printOutput('- Frontend: Astro, React, Next.js, TailwindCSS');
-          printOutput('- Backend: Node.js, Python, Go, NestJS');
-          printOutput('- Banco de Dados: PostgreSQL, MongoDB, Redis');
-          printOutput('- Infra: AWS, Cloudflare, Docker, Vercel');
+        case 'tecnologias':
+        case 'tecnologia':
+          if (currentLang === 'en') {
+            printOutput('High-Performance Stack:');
+            printOutput('- Frontend: Astro, React, Next.js, TypeScript, TailwindCSS');
+            printOutput('- Backend: Node.js, Python, Go, NestJS');
+            printOutput('- Databases: PostgreSQL, MongoDB, Redis');
+            printOutput('- Infrastructure: Cloudflare Edge, AWS, Docker');
+          } else if (currentLang === 'es') {
+            printOutput('Stack de Alto Rendimiento:');
+            printOutput('- Frontend: Astro, React, Next.js, TypeScript, TailwindCSS');
+            printOutput('- Backend: Node.js, Python, Go, NestJS');
+            printOutput('- Bases de Datos: PostgreSQL, MongoDB, Redis');
+            printOutput('- Infraestructura: Cloudflare Edge, AWS, Docker');
+          } else {
+            printOutput('Nossa stack de alta performance:');
+            printOutput('- Frontend: Astro, React, Next.js, TypeScript, TailwindCSS');
+            printOutput('- Backend: Node.js, Python, Go, NestJS');
+            printOutput('- Banco de Dados: PostgreSQL, MongoDB, Redis');
+            printOutput('- Infra: Cloudflare Edge, AWS, Docker');
+          }
           break;
           
+        case 'contato':
         case 'contact':
-          printOutput('Iniciando protocolo de comunicação...', 'warning');
-          printOutput('WhatsApp Direto: <a href="https://wa.me/5511961742713" target="_blank" style="color: #a855f7; text-decoration: underline;">(11) 96174-2713 (Abrir no WhatsApp)</a>');
-          printOutput('Formulário: <a href="#orcamento" style="color: #a855f7; text-decoration: underline;">Ir para o formulário de orçamento</a>');
-          printOutput('Status: Aguardando sua mensagem.');
+        case 'contacto':
+          if (currentLang === 'en') {
+            printOutput('Initiating communication protocol...', 'warning');
+            printOutput('Direct WhatsApp: <a href="https://wa.me/5511961742713" target="_blank" style="color: #a855f7; text-decoration: underline;">+55 (11) 96174-2713 (Chat on WhatsApp)</a>');
+            printOutput('Proposal Form: <a href="#orcamento" style="color: #a855f7; text-decoration: underline;">Open Request Form</a>');
+            printOutput('Status: Ready for briefing.');
+          } else if (currentLang === 'es') {
+            printOutput('Iniciando protocolo de comunicación...', 'warning');
+            printOutput('WhatsApp Directo: <a href="https://wa.me/5511961742713" target="_blank" style="color: #a855f7; text-decoration: underline;">+55 (11) 96174-2713 (Abrir en WhatsApp)</a>');
+            printOutput('Formulario: <a href="#orcamento" style="color: #a855f7; text-decoration: underline;">Ir al formulario de presupuesto</a>');
+            printOutput('Estado: Esperando su mensaje.');
+          } else {
+            printOutput('Iniciando protocolo de comunicação...', 'warning');
+            printOutput('WhatsApp Direto: <a href="https://wa.me/5511961742713" target="_blank" style="color: #a855f7; text-decoration: underline;">(11) 96174-2713 (Abrir no WhatsApp)</a>');
+            printOutput('Formulário: <a href="#orcamento" style="color: #a855f7; text-decoration: underline;">Ir para o formulário de orçamento</a>');
+            printOutput('Status: Aguardando sua mensagem.');
+          }
           break;
           
+        case 'limpar':
         case 'clear':
           outputArea.innerHTML = '';
           break;
           
+        case 'quemsoueu':
         case 'whoami':
-          printOutput('Visitante não identificado. Nível de acesso: Nulo.');
+        case 'quiensoy':
+          if (currentLang === 'en') {
+            printOutput('Guest user detected. Permission level: Standard visitor.');
+          } else if (currentLang === 'es') {
+            printOutput('Usuario visitante detectado. Nivel de acceso: Estándar.');
+          } else {
+            printOutput('Visitante detectado. Nível de acesso: Padrão.');
+          }
           break;
           
         case 'sudo':
-          printOutput('FATAL ERROR: Permission denied.', 'error');
-          printOutput('This incident has been reported to the system administrator.', 'error');
+          if (currentLang === 'en') {
+            printOutput('FATAL ERROR: Permission denied.', 'error');
+            printOutput('This incident has been reported to the system administrator.', 'error');
+          } else if (currentLang === 'es') {
+            printOutput('ERROR CRÍTICO: Permiso denegado.', 'error');
+            printOutput('Este incidente ha sido reportado al administrador.', 'error');
+          } else {
+            printOutput('ERRO CRÍTICO: Permissão negada.', 'error');
+            printOutput('Este incidente foi reportado ao administrador do sistema.', 'error');
+          }
           break;
           
         default:
-          printOutput(`bash: ${cmd}: command not found`, 'error');
-          printOutput(`Type 'help' to see available commands.`);
+          if (currentLang === 'en') {
+            printOutput(`bash: ${cmd}: command not found`, 'error');
+            printOutput(`Type 'help' to see available commands.`);
+          } else if (currentLang === 'es') {
+            printOutput(`bash: ${cmd}: comando no encontrado`, 'error');
+            printOutput(`Escriba 'ayuda' para ver los comandos disponibles.`);
+          } else {
+            printOutput(`bash: ${cmd}: comando não encontrado`, 'error');
+            printOutput(`Digite 'ajuda' para ver os comandos disponíveis.`);
+          }
       }
     }
   });

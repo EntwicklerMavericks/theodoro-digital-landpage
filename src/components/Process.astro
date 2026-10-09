@@ -26,9 +26,9 @@ const steps = [
 <section id="metodologia" class="process-section reveal">
   <div class="container">
     <div class="section-header text-center">
-      <div class="badge">COMO OPERAMOS</div>
-      <h2>Metodologia de <span class="text-gradient animated-gradient">Alta Precisão</span></h2>
-      <p>Um fluxo de trabalho projetado para mitigar riscos e entregar software nível enterprise, respeitando prazos e objetivos de negócio.</p>
+      <div class="badge" data-i18n="process.badge">METODOLOGIA</div>
+      <h2 data-i18n="process.title" data-i18n-html>Do Diagnóstico ao <span class="text-gradient animated-gradient">Deploy de Alta Performance</span></h2>
+      <p data-i18n="process.description">Um processo de engenharia transparente, ágil e focado no retorno comercial do seu investimento.</p>
     </div>
     
     <div class="timeline-container">
@@ -46,8 +46,8 @@ const steps = [
             
             <div class="step-card">
               <div class="step-number">{step.id}</div>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
+              <h3 data-i18n={`process.steps.${index}.title`}>{step.title}</h3>
+              <p data-i18n={`process.steps.${index}.desc`}>{step.desc}</p>
             </div>
           </div>
         ))}

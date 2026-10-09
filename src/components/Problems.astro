@@ -33,9 +33,9 @@ const problems = [
   
   <div class="container relative">
     <div class="section-header text-center">
-      <div class="badge-alert">SCANNER DE MERCADO</div>
-      <h2>O seu crescimento está sendo <span class="text-gradient">sabotado?</span></h2>
-      <p>Empresas travam quando a tecnologia não acompanha a operação. Você se identifica com algum desses cenários?</p>
+      <div class="badge-alert" data-i18n="problems.badge">SCANNER DE MERCADO</div>
+      <h2 data-i18n="problems.title" data-i18n-html>O seu crescimento está sendo <span class="text-gradient">sabotado?</span></h2>
+      <p data-i18n="problems.description">Empresas travam quando a tecnologia não acompanha a operação. Você se identifica com algum desses cenários?</p>
     </div>
     
     <div class="problems-grid">
@@ -51,8 +51,8 @@ const problems = [
             </svg>
           </div>
           <div class="problem-content">
-            <h3>{p.question}</h3>
-            <p>{p.solution}</p>
+            <h3 data-i18n={`problems.cards.${index}.question`}>{p.question}</h3>
+            <p data-i18n={`problems.cards.${index}.solution`}>{p.solution}</p>
           </div>
         </div>
       ))}
@@ -61,10 +61,10 @@ const problems = [
     <div class="premium-cta-banner">
       <div class="banner-glow"></div>
       <div class="banner-content">
-        <h3>Pronto para otimizar sua operação?</h3>
-        <p>Cada negócio tem suas particularidades. Vamos entender o seu cenário e arquitetar a solução ideal para os seus desafios.</p>
+        <h3 data-i18n="problems.bannerTitle">Pronto para otimizar sua operação?</h3>
+        <p data-i18n="problems.bannerDesc">Cada negócio tem suas particularidades. Vamos entender o seu cenário e arquitetar a solução ideal para os seus desafios.</p>
         <a href="#orcamento" class="btn-primary pulse-btn">
-          <span>Quero conversar sobre meu negócio</span>
+          <span data-i18n="problems.bannerBtn">Quero conversar sobre meu negócio</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>

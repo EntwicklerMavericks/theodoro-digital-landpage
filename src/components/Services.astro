@@ -36,19 +36,19 @@ const offerings = [
 <section id="solucoes" class="offerings reveal-section">
   <div class="container">
     <div class="section-header text-center">
-      <div class="badge">O QUE EU FAÇO</div>
-      <h2>Engenharia de Software para <span class="text-gradient">Alavancar seu Negócio</span></h2>
-      <p>Esqueça os "criadores de site". Eu construo a base tecnológica que a sua empresa precisa para vender mais e operar sem gargalos.</p>
+      <div class="badge" data-i18n="services.badge">O QUE EU FAÇO</div>
+      <h2 data-i18n="services.title" data-i18n-html>Engenharia de Software para <span class="text-gradient">Alavancar seu Negócio</span></h2>
+      <p data-i18n="services.description">Esqueça os "criadores de site". Eu construo a base tecnológica que a sua empresa precisa para vender mais e operar sem gargalos.</p>
     </div>
     
     <div class="cards-grid" id="cards-grid">
-      {offerings.map(item => (
+      {offerings.map((item, index) => (
         <div class="glow-card">
           <div class="card-border"></div>
           <div class="card-content">
             <div class="icon-box" set:html={item.icon} />
-            <h3>{item.title}</h3>
-            <p>{item.desc}</p>
+            <h3 data-i18n={`services.items.${index}.title`}>{item.title}</h3>
+            <p data-i18n={`services.items.${index}.desc`}>{item.desc}</p>
           </div>
         </div>
       ))}

@@ -30,23 +30,23 @@ const faqs = [
 <section class="faq reveal">
   <div class="container">
     <div class="section-header text-center">
-      <div class="badge">KNOWLEDGE BASE</div>
-      <h2>Dúvidas <span class="text-gradient animated-gradient">Comuns</span></h2>
-      <p>Transparência total sobre nosso processo e entregas.</p>
+      <div class="badge" data-i18n="faq.badge">BASE DE CONHECIMENTO</div>
+      <h2 data-i18n="faq.title" data-i18n-html>Dúvidas <span class="text-gradient animated-gradient">Frequentes</span></h2>
+      <p data-i18n="faq.description">Transparência total sobre nosso processo e entregas.</p>
     </div>
     
     <div class="faq-list">
       {faqs.map((faq, index) => (
         <details class="faq-item" style={`--delay: ${index * 0.1}s`}>
           <summary class="faq-question">
-            <span class="q-text">{faq.q}</span>
+            <span class="q-text" data-i18n={`faq.items.${index}.q`}>{faq.q}</span>
             <div class="icon-plus">
               <span></span><span></span>
             </div>
           </summary>
           <div class="faq-answer">
             <div class="answer-content">
-              <p>{faq.a}</p>
+              <p data-i18n={`faq.items.${index}.a`}>{faq.a}</p>
             </div>
           </div>
         </details>
