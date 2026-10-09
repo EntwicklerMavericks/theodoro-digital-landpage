@@ -34,23 +34,23 @@
       </div>
       
       <div class="about-visual">
-        <div class="cyber-window">
+        <div class="cyber-window" id="terminal-window">
           <div class="window-header">
             <div class="dots">
               <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
             </div>
-            <div class="terminal-title">system_diagnostics.exe</div>
+            <div class="terminal-title">guest@theodoro-digital: ~</div>
           </div>
-          <div class="window-body" id="typing-terminal">
-            <div class="line"><span class="prompt">~</span> <span class="cmd">init core_engine</span></div>
-            <div class="line output">[OK] Core engine started</div>
-            <div class="line"><span class="prompt">~</span> <span class="cmd">verify performance_metrics</span></div>
-            <div class="line output">[OK] Load balancing: Active</div>
-            <div class="line output">[OK] Database queries: Optimized (12ms)</div>
-            <div class="line output">[OK] Assets: Minified & CDN Cached</div>
-            <div class="line"><span class="prompt">~</span> <span class="cmd">deploy production</span></div>
-            <div class="line output success">>>> System is Live and Scalable.</div>
-            <div class="cursor"></div>
+          <div class="window-body" id="interactive-terminal" tabindex="0">
+            <div id="terminal-output">
+              <div class="line output success">TheodoroOS v2.0.4 - System Initialized</div>
+              <div class="line output">Type 'help' to see available commands. Click here to type.</div>
+            </div>
+            <div class="terminal-input-line">
+              <span class="prompt">guest@theodoro:~$</span> 
+              <span id="terminal-current-input"></span><div class="cursor"></div>
+            </div>
+            <input type="text" id="terminal-hidden-input" autocomplete="off" spellcheck="false" />
           </div>
         </div>
         
@@ -157,29 +157,29 @@
     transform: translate(-50%, -50%);
     width: 120%;
     height: 120%;
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 60%);
     z-index: 0;
   }
   
   .cyber-window {
-    background-color: rgba(10, 10, 15, 0.9);
+    background-color: rgba(10, 10, 15, 0.95);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     overflow: hidden;
     position: relative;
     z-index: 1;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(168,85,247,0.2);
     transform: rotateY(-15deg) rotateX(5deg);
     transition: transform 0.5s ease;
   }
   
   .cyber-window:hover {
-    transform: rotateY(-5deg) rotateX(2deg);
+    transform: rotateY(0deg) rotateX(0deg);
   }
   
   .window-header {
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(255, 255, 255, 0.05);
     padding: 12px 16px;
     display: flex;
     align-items: center;
@@ -211,36 +211,69 @@
   .window-body {
     padding: 2rem;
     font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     line-height: 1.8;
     color: #e2e8f0;
-    min-height: 250px;
+    height: 350px;
+    overflow-y: auto;
     position: relative;
+    cursor: text;
+  }
+  
+  .window-body::-webkit-scrollbar {
+    width: 8px;
+  }
+  .window-body::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .window-body::-webkit-scrollbar-thumb {
+    background: rgba(168, 85, 247, 0.3);
+    border-radius: 4px;
   }
   
   .line {
-    opacity: 0;
-    transform: translateY(10px);
-    animation: fadeUp 0.3s forwards;
+    margin-bottom: 0.2rem;
+    word-break: break-all;
   }
   
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
+  .prompt { color: #a855f7; font-weight: bold; margin-right: 8px; }
+  .cmd { color: #fff; }
+  .output { color: #94a3b8; }
+  .output.success { color: #10b981; }
+  .output.error { color: #ef4444; }
+  .output.warning { color: #f59e0b; }
+  
+  .terminal-input-line {
+    display: flex;
+    align-items: center;
   }
   
-  .prompt { color: #a855f7; font-weight: bold; }
-  .cmd { color: #60a5fa; }
-  .output { color: #94a3b8; padding-left: 1rem; }
-  .output.success { color: #10b981; font-weight: bold; margin-top: 1rem; }
+  #terminal-current-input {
+    color: #fff;
+    white-space: pre;
+  }
   
   .cursor {
     display: inline-block;
     width: 8px;
-    height: 15px;
+    height: 18px;
     background: #a855f7;
     animation: blink 1s step-end infinite;
-    margin-left: 5px;
+    margin-left: 2px;
     vertical-align: middle;
+  }
+  
+  #terminal-hidden-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
   
   .floating-badge {
@@ -293,28 +326,103 @@
   }
 </style>
 
-<script>
-  // Terminal typing simulation
+<script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    const terminal = document.getElementById('typing-terminal');
+    const terminal = document.getElementById('interactive-terminal');
+    const hiddenInput = document.getElementById('terminal-hidden-input');
+    const currentInputDisplay = document.getElementById('terminal-current-input');
+    const outputArea = document.getElementById('terminal-output');
     
-    if (terminal) {
-      const lines = terminal.querySelectorAll('.line');
+    if (!terminal || !hiddenInput || !currentInputDisplay || !outputArea) return;
+
+    // Focus hidden input when clicking anywhere on the terminal window
+    terminal.addEventListener('click', () => {
+      hiddenInput.focus();
+    });
+
+    // Update visible text when typing
+    hiddenInput.addEventListener('input', (e) => {
+      currentInputDisplay.textContent = e.target.value;
+      terminal.scrollTop = terminal.scrollHeight;
+    });
+
+    // Handle command execution
+    hiddenInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const cmd = hiddenInput.value.trim();
+        
+        // Print the command that was typed
+        const cmdLine = document.createElement('div');
+        cmdLine.className = 'line';
+        cmdLine.innerHTML = `<span class="prompt">guest@theodoro:~$</span> <span class="cmd">${cmd}</span>`;
+        outputArea.appendChild(cmdLine);
+        
+        // Execute logic
+        executeCommand(cmd.toLowerCase());
+        
+        // Clear input
+        hiddenInput.value = '';
+        currentInputDisplay.textContent = '';
+        terminal.scrollTop = terminal.scrollHeight;
+      }
+    });
+    
+    function printOutput(htmlContent, styleClass = '') {
+      const outLine = document.createElement('div');
+      outLine.className = `line output ${styleClass}`;
+      outLine.innerHTML = htmlContent;
+      outputArea.appendChild(outLine);
+    }
+    
+    function executeCommand(cmd) {
+      if (!cmd) return;
       
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            let delay = 0;
-            lines.forEach((line, index) => {
-              (line as HTMLElement).style.animationDelay = `${delay}s`;
-              delay += (index % 2 === 0) ? 0.8 : 0.2; // Pause on commands, fast on output
-            });
-            observer.disconnect();
-          }
-        });
-      }, { threshold: 0.5 });
-      
-      observer.observe(terminal);
+      switch(cmd) {
+        case 'help':
+          printOutput('Comandos disponíveis:');
+          printOutput('&nbsp;&nbsp;<b>about</b>&nbsp;&nbsp;&nbsp;&nbsp;- Descubra quem somos');
+          printOutput('&nbsp;&nbsp;<b>stack</b>&nbsp;&nbsp;&nbsp;&nbsp;- Lista de tecnologias utilizadas');
+          printOutput('&nbsp;&nbsp;<b>contact</b>&nbsp;&nbsp;- Como falar conosco');
+          printOutput('&nbsp;&nbsp;<b>clear</b>&nbsp;&nbsp;&nbsp;&nbsp;- Limpa a tela do terminal');
+          printOutput('&nbsp;&nbsp;<b>sudo</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- [ACESSO RESTRITO]');
+          break;
+          
+        case 'about':
+          printOutput('Theodoro Digital é uma operação boutique de engenharia de software.', 'success');
+          printOutput('Nós não usamos templates prontos. Nós construímos infraestrutura tecnológica sob medida para empresas que precisam escalar.');
+          break;
+          
+        case 'stack':
+          printOutput('Nossa stack de alta performance:');
+          printOutput('- Frontend: Astro, React, Next.js, TailwindCSS');
+          printOutput('- Backend: Node.js, Python, Go, NestJS');
+          printOutput('- Banco de Dados: PostgreSQL, MongoDB, Redis');
+          printOutput('- Infra: AWS, Cloudflare, Docker, Vercel');
+          break;
+          
+        case 'contact':
+          printOutput('Iniciando protocolo de comunicação...', 'warning');
+          printOutput('WhatsApp: <a href="#orcamento" style="color: #a855f7; text-decoration: underline;">Clique aqui para enviar uma mensagem</a>');
+          printOutput('Status: Aguardando seu briefing.');
+          break;
+          
+        case 'clear':
+          outputArea.innerHTML = '';
+          break;
+          
+        case 'whoami':
+          printOutput('Visitante não identificado. Nível de acesso: Nulo.');
+          break;
+          
+        case 'sudo':
+          printOutput('FATAL ERROR: Permission denied.', 'error');
+          printOutput('This incident has been reported to the system administrator.', 'error');
+          break;
+          
+        default:
+          printOutput(`bash: ${cmd}: command not found`, 'error');
+          printOutput(`Type 'help' to see available commands.`);
+      }
     }
   });
 </script>
