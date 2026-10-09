@@ -1,0 +1,65 @@
+---
+import { config } from '../data/config';
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { 
+  title = config.seo.title, 
+  description = config.seo.description 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		
+		<!-- Google Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+	<body>
+		<slot />
+		
+		<script>
+		  document.addEventListener('DOMContentLoaded', () => {
+		    const observerOptions = {
+		      root: null,
+		      rootMargin: '0px',
+		      threshold: 0.15
+		    };
+		    
+		    const observer = new IntersectionObserver((entries, obs) => {
+		      entries.forEach(entry => {
+		        if (entry.isIntersecting) {
+		          entry.target.classList.add('active');
+		          obs.unobserve(entry.target);
+		        }
+		      });
+		    }, observerOptions);
+		    
+		    // Adicionar classe reveal a todas as seções, exceto a primeira
+		    const sections = document.querySelectorAll('main > section:not(:first-child)');
+		    sections.forEach(section => {
+		      section.classList.add('reveal');
+		      observer.observe(section);
+		    });
+		  });
+		</script>
+	</body>
+</html>

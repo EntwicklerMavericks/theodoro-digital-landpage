@@ -1,0 +1,320 @@
+---
+import { config } from '../data/config';
+---
+
+<section id="orcamento" class="contact">
+  <div class="container">
+    <div class="contact-wrapper">
+      <div class="contact-info">
+        <h2>Faça seu orçamento <span class="text-gradient">sem compromisso.</span></h2>
+        <p>Conte um pouco sobre o que você precisa. Vamos entender sua ideia e conversar sobre a melhor solução para o seu negócio.</p>
+        
+        <div class="direct-contact">
+          <p>Prefere chamar direto?</p>
+          <a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" class="btn-secondary">
+            Falar diretamente pelo WhatsApp
+          </a>
+        </div>
+      </div>
+      
+      <div class="contact-form-container">
+        <form id="wa-form" class="wa-form">
+          <div class="form-group">
+            <label for="name">Nome *</label>
+            <input type="text" id="name" name="name" required placeholder="Seu nome" />
+            <span class="error-msg">Por favor, informe seu nome.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="company">Nome da empresa (opcional)</label>
+            <input type="text" id="company" name="company" placeholder="Sua empresa" />
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">WhatsApp para contato *</label>
+            <input type="tel" id="phone" name="phone" required placeholder="(00) 00000-0000" />
+            <span class="error-msg">Por favor, informe um WhatsApp válido.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="service">Tipo de serviço desejado *</label>
+            <select id="service" name="service" required>
+              <option value="" disabled selected>Selecione uma opção...</option>
+              <option value="Criação de site">Criação de site</option>
+              <option value="Landing page">Landing page</option>
+              <option value="Página de vendas ou captura de leads">Página de vendas ou captura de leads</option>
+              <option value="Sistema de gestão ou ERP">Sistema de gestão ou ERP</option>
+              <option value="Aplicação web ou mobile">Aplicação web ou mobile</option>
+              <option value="Automação de processos">Automação de processos</option>
+              <option value="Integração entre sistemas">Integração entre sistemas</option>
+              <option value="Manutenção ou melhoria de sistema existente">Manutenção ou melhoria de sistema existente</option>
+              <option value="Consultoria tecnológica">Consultoria tecnológica</option>
+              <option value="Divulgação ou interesse em produto digital">Divulgação ou interesse em produto digital</option>
+              <option value="Outro / Ainda não sei qual solução preciso">Outro / Ainda não sei qual solução preciso</option>
+            </select>
+            <span class="error-msg">Por favor, selecione um serviço.</span>
+          </div>
+          
+          <div class="form-group">
+            <label for="description">Descrição da necessidade (opcional)</label>
+            <textarea id="description" name="description" rows="4" placeholder="Conte-nos um pouco sobre o seu projeto..."></textarea>
+          </div>
+          
+          <button type="submit" class="btn-primary btn-block" data-wa={config.contact.whatsapp}>
+            Solicitar orçamento pelo WhatsApp
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background-color: var(--color-bg-secondary);
+  }
+  
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  
+  .contact-info h2 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-info p {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+  
+  .direct-contact {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .direct-contact p {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  
+  .contact-form-container {
+    background: rgba(10, 10, 15, 0.6);
+    backdrop-filter: blur(20px);
+    padding: 3rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .contact-form-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
+  }
+  
+  .wa-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  input, select, textarea {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 1rem 1.2rem;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #a855f7;
+    background-color: rgba(168, 85, 247, 0.05);
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+  }
+  
+  input::placeholder, textarea::placeholder {
+    color: #475569;
+  }
+  
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+  }
+  
+  select option {
+    background-color: #0a0a0c;
+    color: #fff;
+  }
+  
+  .error-msg {
+    color: #ef4444;
+    font-size: 0.85rem;
+    display: none;
+    margin-top: 0.25rem;
+  }
+  
+  .form-group.error input, 
+  .form-group.error select {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.05);
+  }
+  
+  .form-group.error .error-msg {
+    display: block;
+    animation: shake 0.4s ease-in-out;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+  
+  .btn-block {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 1.2rem;
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+    }
+    
+    .contact-info h2 {
+      font-size: 2rem;
+    }
+    
+    .contact-form-container {
+      padding: 1.5rem;
+    }
+  }
+</style>
+
+<script>
+  const form = document.getElementById('wa-form');
+  
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      let isValid = true;
+      const name = document.getElementById('name') as HTMLInputElement;
+      const company = document.getElementById('company') as HTMLInputElement;
+      const phone = document.getElementById('phone') as HTMLInputElement;
+      const service = document.getElementById('service') as HTMLSelectElement;
+      const description = document.getElementById('description') as HTMLTextAreaElement;
+      
+      document.querySelectorAll('.form-group').forEach(el => el.classList.remove('error'));
+      
+      if (!name.value.trim()) {
+        name.parentElement?.classList.add('error');
+        isValid = false;
+      }
+      
+      if (!phone.value.trim()) {
+        phone.parentElement?.classList.add('error');
+        isValid = false;
+      }
+      
+      if (!service.value) {
+        service.parentElement?.classList.add('error');
+        isValid = false;
+      }
+      
+      if (isValid) {
+        const waNumber = form.querySelector('button')?.getAttribute('data-wa');
+        
+        let message = `Olá! Gostaria de solicitar um orçamento sem compromisso.\n\n`;
+        message += `*Nome:* ${name.value.trim()}\n`;
+        
+        if (company.value.trim()) {
+          message += `*Empresa:* ${company.value.trim()}\n`;
+        }
+        
+        message += `*WhatsApp para contato:* ${phone.value.trim()}\n`;
+        message += `*Serviço de interesse:* ${service.value}\n\n`;
+        
+        if (description.value.trim()) {
+          message += `*Descrição da necessidade:*\n${description.value.trim()}\n\n`;
+        }
+        
+        message += `Gostaria de conversar para entender as possibilidades e receber uma proposta.`;
+        
+        const encodedMessage = encodeURIComponent(message);
+        const waUrl = `https://wa.me/${waNumber}?text=${encodedMessage}`;
+        
+        window.open(waUrl, '_blank');
+      }
+    });
+
+    const setServiceFromClick = () => {
+      document.querySelectorAll('a[data-service]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const serviceVal = btn.getAttribute('data-service');
+          if (serviceVal) {
+            const select = document.getElementById('service') as HTMLSelectElement;
+            
+            let optionExists = false;
+            for (let i = 0; i < select.options.length; i++) {
+              if (select.options[i].value === serviceVal) {
+                optionExists = true;
+                break;
+              }
+            }
+            
+            if (!optionExists) {
+              const option = document.createElement('option');
+              option.value = serviceVal;
+              option.text = serviceVal;
+              select.add(option);
+            }
+            
+            select.value = serviceVal;
+          }
+        });
+      });
+    };
+    
+    setServiceFromClick();
+  }
+</script>

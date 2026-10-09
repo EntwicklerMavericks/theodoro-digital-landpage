@@ -1,0 +1,148 @@
+---
+import { config } from '../data/config';
+---
+
+<section class="cta-section reveal">
+  <div class="orb-container">
+    <div class="orb"></div>
+    <div class="orb-core"></div>
+  </div>
+  
+  <div class="container relative">
+    <div class="cta-content text-center">
+      <h2>O próximo passo da sua <br/><span class="text-gradient">evolução tecnológica.</span></h2>
+      <p>Abrace a engenharia de software de ponta e deixe seus concorrentes lutando com sistemas lentos. O momento de escalar é agora.</p>
+      
+      <div class="cta-actions">
+        <a href="#orcamento" class="btn-cyber-large">
+          <span class="btn-text">Iniciar Projeto Agora</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: 10rem 0;
+    background-color: #020202;
+    position: relative;
+    overflow: hidden;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .orb-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 600px;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .orb {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent, rgba(168, 85, 247, 0.3), rgba(59, 130, 246, 0.3), transparent);
+    filter: blur(40px);
+    animation: spin 10s linear infinite;
+  }
+  
+  .orb-core {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 70%);
+    filter: blur(20px);
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .relative {
+    position: relative;
+    z-index: 10;
+  }
+  
+  .cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 5rem 3rem;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+  }
+  
+  .cta-content h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  
+  .cta-content p {
+    font-size: 1.25rem;
+    color: #94a3b8;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .btn-cyber-large {
+    display: inline-block;
+    position: relative;
+    padding: 24px 48px;
+    background: #0a0a0c;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border: 1px solid rgba(168, 85, 247, 0.5);
+    border-radius: 8px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2);
+  }
+  
+  .btn-cyber-large::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.8), rgba(59, 130, 246, 0.8));
+    z-index: 0;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  
+  .btn-cyber-large:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(168, 85, 247, 0.4);
+    border-color: transparent;
+  }
+  
+  .btn-cyber-large:hover::before {
+    opacity: 1;
+  }
+  
+  .btn-text {
+    position: relative;
+    z-index: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .cta-content { padding: 3rem 1.5rem; }
+    .cta-content h2 { font-size: 2.5rem; }
+  }
+</style>

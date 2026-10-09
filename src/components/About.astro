@@ -1,0 +1,320 @@
+---
+---
+
+<section id="sobre" class="about reveal">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content">
+        <div class="badge">A ENGENHARIA</div>
+        <h2>Sistemas construídos para <span class="text-gradient animated-gradient">performance e escala.</span></h2>
+        
+        <div class="about-text">
+          <p>O mercado está saturado de soluções lentas e agências que dependem de templates genéricos. Atuamos como o <strong>braço de engenharia tecnológica</strong> do seu negócio.</p>
+          <p>Seja para modernizar uma operação travada, lançar um produto digital imbatível ou automatizar processos internos, aplicamos os mesmos padrões de segurança e arquitetura utilizados por grandes players de tecnologia.</p>
+        </div>
+        
+        <div class="tech-stack">
+          <div class="stack-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Arquitetura Resiliente
+          </div>
+          <div class="stack-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            UI/UX Premium
+          </div>
+          <div class="stack-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Código Escalável
+          </div>
+          <div class="stack-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Deploy Contínuo
+          </div>
+        </div>
+      </div>
+      
+      <div class="about-visual">
+        <div class="cyber-window">
+          <div class="window-header">
+            <div class="dots">
+              <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+            </div>
+            <div class="terminal-title">system_diagnostics.exe</div>
+          </div>
+          <div class="window-body" id="typing-terminal">
+            <div class="line"><span class="prompt">~</span> <span class="cmd">init core_engine</span></div>
+            <div class="line output">[OK] Core engine started</div>
+            <div class="line"><span class="prompt">~</span> <span class="cmd">verify performance_metrics</span></div>
+            <div class="line output">[OK] Load balancing: Active</div>
+            <div class="line output">[OK] Database queries: Optimized (12ms)</div>
+            <div class="line output">[OK] Assets: Minified & CDN Cached</div>
+            <div class="line"><span class="prompt">~</span> <span class="cmd">deploy production</span></div>
+            <div class="line output success">>>> System is Live and Scalable.</div>
+            <div class="cursor"></div>
+          </div>
+        </div>
+        
+        <div class="floating-badge badge-1">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          Security Grade A
+        </div>
+        
+        <div class="floating-badge badge-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          Zero Latency
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: #050505;
+    padding: 10rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(168, 85, 247, 0.1);
+    color: #c084fc;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+  }
+  
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  
+  .about-content h2 {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+  }
+  
+  .animated-gradient {
+    background: linear-gradient(to right, #ffffff, #a855f7, #ffffff);
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  
+  .about-text p {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-text strong {
+    color: #fff;
+    font-weight: 600;
+  }
+  
+  .tech-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 3rem;
+  }
+  
+  .stack-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f8fafc;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  
+  .stack-item svg {
+    color: #10b981;
+  }
+  
+  /* Cyber Window Styling */
+  .about-visual {
+    position: relative;
+    perspective: 1000px;
+  }
+  
+  .about-visual::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 60%);
+    z-index: 0;
+  }
+  
+  .cyber-window {
+    background-color: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(255,255,255,0.05);
+    transform: rotateY(-15deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+  }
+  
+  .cyber-window:hover {
+    transform: rotateY(-5deg) rotateX(2deg);
+  }
+  
+  .window-header {
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  .dots {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  
+  .red { background-color: #ff5f56; }
+  .yellow { background-color: #ffbd2e; }
+  .green { background-color: #27c93f; }
+  
+  .terminal-title {
+    margin: 0 auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+  
+  .window-body {
+    padding: 2rem;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: #e2e8f0;
+    min-height: 250px;
+    position: relative;
+  }
+  
+  .line {
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeUp 0.3s forwards;
+  }
+  
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .prompt { color: #a855f7; font-weight: bold; }
+  .cmd { color: #60a5fa; }
+  .output { color: #94a3b8; padding-left: 1rem; }
+  .output.success { color: #10b981; font-weight: bold; margin-top: 1rem; }
+  
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 15px;
+    background: #a855f7;
+    animation: blink 1s step-end infinite;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  
+  .floating-badge {
+    position: absolute;
+    background: rgba(10, 10, 15, 0.9);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    z-index: 2;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+  }
+  
+  .badge-1 {
+    top: -20px;
+    right: -20px;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .badge-2 {
+    bottom: -20px;
+    left: -20px;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  @media (max-width: 992px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+    
+    .about-content h2 {
+      font-size: 2.5rem;
+    }
+    
+    .floating-badge {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  // Terminal typing simulation
+  document.addEventListener('DOMContentLoaded', () => {
+    const terminal = document.getElementById('typing-terminal');
+    
+    if (terminal) {
+      const lines = terminal.querySelectorAll('.line');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let delay = 0;
+            lines.forEach((line, index) => {
+              (line as HTMLElement).style.animationDelay = `${delay}s`;
+              delay += (index % 2 === 0) ? 0.8 : 0.2; // Pause on commands, fast on output
+            });
+            observer.disconnect();
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      observer.observe(terminal);
+    }
+  });
+</script>

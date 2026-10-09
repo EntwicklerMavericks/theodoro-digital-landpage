@@ -1,0 +1,143 @@
+---
+import { config } from '../data/config';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>{config.brandName}</h3>
+        <p>Desenvolvimento de soluções digitais sob medida para empresas.</p>
+        <div class="social-links">
+          {config.socials.linkedin && <a href={config.socials.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+          {config.socials.github && <a href={config.socials.github} target="_blank" rel="noopener noreferrer">GitHub</a>}
+        </div>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Serviços</h4>
+        <ul>
+          <li><a href="#solucoes">Presença Digital</a></li>
+          <li><a href="#solucoes">Sistemas Empresariais</a></li>
+          <li><a href="#solucoes">Automação</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-links">
+        <h4>Produtos</h4>
+        <ul>
+          <li><a href={config.products.nexa.url}>Nexa ERP</a></li>
+          <li><a href={config.products.alicerce.url}>Alicerce</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <p><a href={`mailto:${config.contact.email}`}>{config.contact.email}</a></p>
+        <p><a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; {year} {config.brandName}. Todos os direitos reservados.</p>
+      <a href="/privacidade" class="privacy-link">Política de Privacidade</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--color-bg-secondary);
+    padding: 4rem 0 2rem;
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-text-main);
+  }
+  
+  .footer-brand p {
+    color: var(--color-text-secondary);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .social-links a {
+    color: var(--color-lavender-neon);
+    font-size: 0.9rem;
+  }
+  
+  .footer-links h4, .footer-contact h4 {
+    color: var(--color-text-main);
+    margin-bottom: 1.25rem;
+    font-size: 1.1rem;
+  }
+  
+  .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .footer-links a, .footer-contact a {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  
+  .footer-links a:hover, .footer-contact a:hover {
+    color: var(--color-lavender-neon);
+  }
+  
+  .footer-contact p {
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+  }
+  
+  .privacy-link {
+    color: var(--color-text-secondary);
+  }
+  
+  @media (max-width: 992px) {
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .footer-bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,314 @@
+---
+const problems = [
+  {
+    question: "Sua empresa precisa atrair mais clientes pela internet?",
+    solution: "Crio landing pages e sites focados em conversão e captação de leads."
+  },
+  {
+    question: "Você ainda depende de planilhas para organizar a operação?",
+    solution: "Desenvolvo sistemas de gestão sob medida, centralizando suas informações."
+  },
+  {
+    question: "Sua equipe perde tempo com tarefas manuais?",
+    solution: "Automatizo fluxos repetitivos, integrando os sistemas que você já usa."
+  },
+  {
+    question: "Seus clientes precisam entrar em contato para obter informações básicas?",
+    solution: "Crio portais e catálogos digitais acessíveis 24/7 para seus clientes."
+  },
+  {
+    question: "Você precisa integrar sistemas que não se comunicam?",
+    solution: "Construo APIs e conecto diferentes plataformas de forma segura."
+  },
+  {
+    question: "Tem uma ideia de aplicativo ou plataforma e precisa desenvolvê-la?",
+    solution: "Transformo sua ideia em um MVP real, robusto e escalável."
+  }
+];
+---
+
+<section id="problemas" class="problems reveal">
+  <div class="scanner-line"></div>
+  <div class="container relative">
+    <div class="section-header text-center">
+      <div class="badge-alert">IDENTIFICAÇÃO DE GARGALOS</div>
+      <h2>O seu crescimento está sendo <span class="text-gradient">sabotado?</span></h2>
+      <p>Empresas travam quando a tecnologia não acompanha a operação. Você se identifica com algum desses cenários?</p>
+    </div>
+    
+    <div class="problems-grid">
+      {problems.map((p, index) => (
+        <div class="problem-card" style={`--delay: ${index * 0.1}s`}>
+          <div class="card-glitch-layer"></div>
+          <div class="icon-wrapper">
+            <div class="icon-pulse"></div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <div class="problem-content">
+            <h3>{p.question}</h3>
+            <p>{p.solution}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="premium-cta-banner">
+      <div class="banner-glow"></div>
+      <div class="banner-content">
+        <h3>Pronto para otimizar sua operação?</h3>
+        <p>Cada negócio tem suas particularidades. Vamos entender o seu cenário e arquitetar a solução ideal para os seus desafios.</p>
+        <a href="#orcamento" class="btn-primary pulse-btn">
+          <span>Quero conversar sobre meu negócio</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .problems {
+    background-color: #030305;
+    position: relative;
+    padding: 8rem 0;
+    overflow: hidden;
+  }
+  
+  /* Radar Scanner Effect */
+  .scanner-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.05), rgba(239, 68, 68, 0.1), transparent);
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+    z-index: 1;
+    pointer-events: none;
+    animation: scan 8s linear infinite;
+  }
+  
+  @keyframes scan {
+    0% { transform: translateY(-150px); }
+    100% { transform: translateY(1200px); }
+  }
+  
+  .relative { position: relative; z-index: 2; }
+  
+  .badge-alert {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(239, 68, 68, 0.1);
+    color: #f87171;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+  }
+  
+  .section-header {
+    margin-bottom: 5rem;
+    text-align: center;
+  }
+  
+  .section-header p {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    margin-top: 1rem;
+  }
+  
+  .problems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Cyber Vulnerability Cards */
+  .problem-card {
+    background-color: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+  
+  .problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 2px; height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: 0.4s ease;
+  }
+  
+  .problem-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(239, 68, 68, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(239, 68, 68, 0.05);
+  }
+  
+  .problem-card:hover::before {
+    background: #ef4444;
+    box-shadow: 0 0 10px #ef4444;
+  }
+  
+  .card-glitch-layer {
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    opacity: 0;
+    mix-blend-mode: overlay;
+    transition: 0.3s;
+    pointer-events: none;
+  }
+  
+  .problem-card:hover .card-glitch-layer {
+    opacity: 0.15;
+  }
+  
+  .icon-wrapper {
+    position: relative;
+    color: #ef4444;
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+  
+  .icon-pulse {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    background: rgba(239, 68, 68, 0.2);
+    animation: alert-pulse 2s infinite;
+  }
+  
+  @keyframes alert-pulse {
+    0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+    100% { transform: translate(-50%, -50%) scale(2.5); opacity: 0; }
+  }
+  
+  .problem-content h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+    color: #f8fafc;
+  }
+  
+  .problem-content p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  /* PREMIUM BANNER */
+  .premium-cta-banner {
+    position: relative;
+    margin-top: 4rem;
+    border-radius: 24px;
+    padding: 1px; /* Thin gradient border */
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 100%);
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  
+  .banner-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.15) 0%, transparent 60%);
+    z-index: 0;
+    pointer-events: none;
+    animation: slow-pulse 8s ease-in-out infinite alternate;
+  }
+  
+  @keyframes slow-pulse {
+    0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+  }
+  
+  .banner-content {
+    position: relative;
+    z-index: 1;
+    background: #0a0a0c;
+    border-radius: 23px;
+    padding: 5rem 2rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+  }
+  
+  .banner-content h3 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #ffffff, var(--color-lavender-neon));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+  }
+  
+  .banner-content p {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+  
+  .pulse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .pulse-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; 
+    left: -100%;
+    width: 100%; 
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left 0.7s ease;
+  }
+  
+  .pulse-btn:hover::after {
+    left: 100%;
+  }
+  
+  .pulse-btn svg {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  
+  .pulse-btn:hover svg {
+    transform: translateX(6px);
+  }
+
+  @media (max-width: 768px) {
+    .banner-content { padding: 3rem 1.5rem; }
+    .banner-content h3 { font-size: 1.8rem; }
+  }
+</style>

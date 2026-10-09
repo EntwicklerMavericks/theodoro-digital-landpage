@@ -1,0 +1,204 @@
+---
+const faqs = [
+  {
+    q: "Quais serviços de engenharia vocês oferecem?",
+    a: "Desenvolvimento de aplicações web, landing pages de alta conversão, ERPs personalizados, automações de processos complexos e integração de APIs corporativas. Tudo projetado com arquitetura escalável."
+  },
+  {
+    q: "Atendem empresas de diferentes segmentos?",
+    a: "Sim. Nossos frameworks de arquitetura são agnósticos. Atendemos desde startups buscando tração até indústrias e clínicas precisando modernizar sistemas legados."
+  },
+  {
+    q: "Como funciona a segurança dos dados?",
+    a: "Seguimos protocolos estritos. Implementamos criptografia de ponta a ponta, autenticação segura (JWT/OAuth), proteção contra injeções SQL e XSS, e adequação nativa à LGPD."
+  },
+  {
+    q: "Qual é o tempo médio de desenvolvimento?",
+    a: "Depende do escopo técnico. Landing pages avançadas levam semanas, enquanto ERPs complexos levam meses. Após a fase de Discovery, fornecemos um cronograma de sprints exato."
+  },
+  {
+    q: "Vocês assumem projetos legados de outros desenvolvedores?",
+    a: "Sim. Fazemos uma auditoria de código (Code Review) inicial. Se a base for recuperável, refatoramos e modernizamos. Se estiver muito comprometida, propomos uma reescrita gradual."
+  },
+  {
+    q: "Como funciona o suporte pós-entrega?",
+    a: "Oferecemos SLAs (Service Level Agreements) para garantir tempo de resposta imediato a incidentes, além de pacotes de horas para evolução contínua das features."
+  }
+];
+---
+
+<section class="faq reveal">
+  <div class="container">
+    <div class="section-header text-center">
+      <div class="badge">KNOWLEDGE BASE</div>
+      <h2>Dúvidas <span class="text-gradient animated-gradient">Comuns</span></h2>
+      <p>Transparência total sobre nosso processo e entregas.</p>
+    </div>
+    
+    <div class="faq-list">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" style={`--delay: ${index * 0.1}s`}>
+          <summary class="faq-question">
+            <span class="q-text">{faq.q}</span>
+            <div class="icon-plus">
+              <span></span><span></span>
+            </div>
+          </summary>
+          <div class="faq-answer">
+            <div class="answer-content">
+              <p>{faq.a}</p>
+            </div>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    background-color: #020202;
+    padding: 8rem 0;
+    position: relative;
+  }
+  
+  .badge {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(168, 85, 247, 0.1);
+    color: #c084fc;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+  }
+  
+  .section-header {
+    margin-bottom: 5rem;
+  }
+  
+  .section-header h2 {
+    font-size: 3rem;
+  }
+  
+  .section-header p {
+    color: #94a3b8;
+    font-size: 1.15rem;
+    margin-top: 1rem;
+  }
+  
+  .animated-gradient {
+    background: linear-gradient(to right, #a855f7, #3b82f6, #a855f7);
+    background-size: 200% auto;
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 4s linear infinite;
+  }
+  
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .faq-item {
+    background-color: rgba(10, 10, 15, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  
+  .faq-item:hover {
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  }
+  
+  .faq-question {
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #f8fafc;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    transition: background-color 0.2s;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .q-text {
+    padding-right: 2rem;
+  }
+  
+  .icon-plus {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    flex-shrink: 0;
+  }
+  
+  .icon-plus span {
+    position: absolute;
+    background: #a855f7;
+    border-radius: 2px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .icon-plus span:nth-child(1) {
+    top: 9px; left: 0; width: 20px; height: 2px;
+  }
+  
+  .icon-plus span:nth-child(2) {
+    top: 0; left: 9px; width: 2px; height: 20px;
+  }
+  
+  details[open] .faq-question .icon-plus span:nth-child(2) {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  
+  details[open] .faq-question {
+    background: rgba(168, 85, 247, 0.05);
+  }
+  
+  details[open] .faq-item {
+    border-color: rgba(168, 85, 247, 0.4);
+  }
+  
+  .faq-answer {
+    padding: 0 2rem 2rem;
+    color: #94a3b8;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    border-top: 1px solid transparent;
+  }
+  
+  .answer-content {
+    border-left: 2px solid #a855f7;
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  
+  details[open] .answer-content {
+    animation: slideIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+    animation-delay: 0.1s;
+  }
+  
+  @keyframes slideIn {
+    to { opacity: 1; transform: translateX(0); }
+  }
+</style>
