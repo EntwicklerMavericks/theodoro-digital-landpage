@@ -9,10 +9,10 @@ export const translations = {
       cta: "Iniciar"
     },
     hero: {
-      badge: "ENG. DE SOFTWARE & DESIGN PREMIUM",
-      headline: "A Base Tecnológica do seu <br/><span class='gradient-text animated-gradient'>Próximo Nível.</span>",
-      description: "Não uso templates. Não entrego o básico. Arquitetura de ponta, design system exclusivo e alta performance para quem entende que <strong>tecnologia é o coração das vendas.</strong>",
-      cta: "Iniciar Projeto",
+      badge: "DESENVOLVIMENTO • DESIGN • TECNOLOGIA",
+      headline: "Tecnologia sob medida para <br/><span class='gradient-text animated-gradient'>impulsionar seu negócio.</span>",
+      description: "Crio sites, landing pages e sistemas personalizados para transformar suas ideias em soluções digitais eficientes, profissionais e preparadas para crescer com sua empresa.",
+      cta: "Vamos tirar seu projeto do papel?",
       explore: "Explore"
     },
     problems: {
@@ -209,10 +209,10 @@ export const translations = {
       cta: "Start"
     },
     hero: {
-      badge: "SOFTWARE ENG. & PREMIUM DESIGN",
-      headline: "The Technological Foundation for Your <br/><span class='gradient-text animated-gradient'>Next Level.</span>",
-      description: "I don't use templates. I don't deliver the basics. Cutting-edge architecture, bespoke design systems, and extreme performance for those who understand that <strong>technology is the core of revenue.</strong>",
-      cta: "Start Project",
+      badge: "DEVELOPMENT • DESIGN • TECHNOLOGY",
+      headline: "Bespoke technology to <br/><span class='gradient-text animated-gradient'>power your business growth.</span>",
+      description: "I build custom websites, high-converting landing pages, and systems to transform your ideas into efficient, professional digital solutions ready to scale with your business.",
+      cta: "Let's bring your project to life",
       explore: "Explore"
     },
     problems: {
@@ -409,10 +409,10 @@ export const translations = {
       cta: "Iniciar"
     },
     hero: {
-      badge: "ING. DE SOFTWARE Y DISEÑO PREMIUM",
-      headline: "La Base Tecnológica para su <br/><span class='gradient-text animated-gradient'>Próximo Nivel.</span>",
-      description: "No utilizo plantillas. No entrego lo básico. Arquitectura de vanguardia, sistema de diseño exclusivo y alto rendimiento para quienes comprenden que <strong>la tecnología es el corazón de las ventas.</strong>",
-      cta: "Iniciar Proyecto",
+      badge: "DESARROLLO • DISEÑO • TECNOLOGÍA",
+      headline: "Tecnología a medida para <br/><span class='gradient-text animated-gradient'>impulsar su negocio.</span>",
+      description: "Creo sitios web, landing pages y sistemas personalizados para transformar sus ideas en soluciones digitales eficientes, profesionales y preparadas para crecer con su empresa.",
+      cta: "¿Hacemos realidad su proyecto?",
       explore: "Explorar"
     },
     problems: {

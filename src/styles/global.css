@@ -144,16 +144,23 @@ h2 {
   color: #fff;
 }
 
-/* Scroll Animations */
+/* Scroll Animations - Instant on mobile, smooth proactive on desktop */
 .reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+  opacity: 1;
+  transform: none;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+@media (min-width: 769px) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+  
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

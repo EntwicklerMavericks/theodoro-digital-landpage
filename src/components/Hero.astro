@@ -8,22 +8,21 @@
   <div class="container hero-content">
     <div class="hero-text-center">
       <div class="tech-badge">
-        <span class="live-dot"></span> <span data-i18n="hero.badge">ENG. DE SOFTWARE & DESIGN PREMIUM</span>
+        <span class="live-dot"></span> <span data-i18n="hero.badge">DESENVOLVIMENTO • DESIGN • TECNOLOGIA</span>
       </div>
       
       <h1 class="glitch-headline" data-i18n="hero.headline" data-i18n-html>
-        A Base Tecnológica do seu <br/>
-        <span class="gradient-text animated-gradient">Próximo Nível.</span>
+        Tecnologia sob medida para <br/>
+        <span class="gradient-text animated-gradient">impulsionar seu negócio.</span>
       </h1>
       
       <p class="hero-description" data-i18n="hero.description" data-i18n-html>
-        Não uso templates. Não entrego o básico. Arquitetura de ponta, design system exclusivo e alta performance para quem entende que <strong>tecnologia é o coração das vendas.</strong>
+        Crio sites, landing pages e sistemas personalizados para transformar suas ideias em soluções digitais eficientes, profissionais e preparadas para crescer com sua empresa.
       </p>
       
       <div class="hero-actions">
         <a href="#orcamento" class="btn-cyber">
           <span class="btn-text" data-i18n="hero.cta">Iniciar Projeto</span>
-          <span class="btn-glitch"></span>
         </a>
       </div>
     </div>
@@ -144,39 +143,47 @@
     color: #fff;
   }
   
-  /* Cyber Button */
+  /* Cyber Button (Original Style) */
   .btn-cyber {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
-    padding: 20px 40px;
+    padding: 20px 44px;
     background: transparent;
-    color: #fff;
-    text-transform: uppercase;
-    font-size: 1rem;
+    color: #ffffff;
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 2px;
+    text-transform: uppercase;
     border: none;
     cursor: pointer;
-    overflow: hidden;
-    transition: 0.2s;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    z-index: 1;
   }
   
   .btn-cyber::before {
     content: '';
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
+    inset: 0;
     background: rgba(168, 85, 247, 0.1);
-    border: 1px solid rgba(168, 85, 247, 0.5);
-    box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.2), 0 0 20px rgba(168, 85, 247, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.6);
+    box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.25), 0 0 25px rgba(168, 85, 247, 0.3);
     z-index: -1;
     transform: skewX(-15deg);
-    transition: 0.3s;
+    transition: all 0.3s ease;
   }
   
   .btn-cyber:hover::before {
-    background: rgba(168, 85, 247, 0.3);
-    box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.4), 0 0 30px rgba(168, 85, 247, 0.4);
-    transform: skewX(0deg);
+    background: rgba(168, 85, 247, 0.25);
+    box-shadow: inset 0 0 30px rgba(168, 85, 247, 0.5), 0 0 35px rgba(168, 85, 247, 0.55);
+    border-color: #c084fc;
+    transform: skewX(-15deg) scale(1.02);
+  }
+
+  .btn-cyber:active::before {
+    transform: skewX(-15deg) scale(0.98);
   }
   
   .scroll-indicator {
@@ -229,8 +236,53 @@
   }
   
   @media (max-width: 768px) {
-    .glitch-headline { font-size: 3rem; }
-    .hero-description { font-size: 1.1rem; padding: 0 1rem; }
+    .hero-complex {
+      height: auto;
+      min-height: 100vh;
+      padding: 130px 1rem 60px;
+    }
+    
+    .tech-badge {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      padding: 6px 12px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .glitch-headline {
+      font-size: clamp(2rem, 8.5vw, 2.5rem);
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+    
+    .hero-description {
+      font-size: 0.98rem;
+      line-height: 1.6;
+      padding: 0 0.5rem;
+      margin-bottom: 2.2rem;
+    }
+    
+    .hero-actions {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .btn-cyber {
+      padding: 18px 36px;
+      font-size: 0.9rem;
+      letter-spacing: 1.5px;
+      width: auto;
+      max-width: 90vw;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .scroll-indicator {
+      display: none !important; /* Hide mouse scroll on mobile to avoid overlapping the button */
+    }
   }
 </style>
 
