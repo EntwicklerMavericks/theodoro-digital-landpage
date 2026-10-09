@@ -105,15 +105,15 @@ const problems = [
   .badge-alert {
     display: inline-block;
     padding: 0.4rem 1rem;
-    background: rgba(16, 185, 129, 0.1);
-    color: #10b981;
+    background: rgba(168, 85, 247, 0.1);
+    color: #c084fc;
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
   }
   
   .section-header {
@@ -161,13 +161,13 @@ const problems = [
   
   .problem-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(16, 185, 129, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.05);
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(168, 85, 247, 0.05);
   }
   
   .problem-card:hover::before {
-    background: #10b981;
-    box-shadow: 0 0 10px #10b981;
+    background: #a855f7;
+    box-shadow: 0 0 10px #a855f7;
   }
   
   .card-glitch-layer {
@@ -186,7 +186,7 @@ const problems = [
   
   .icon-wrapper {
     position: relative;
-    color: #10b981;
+    color: #a855f7;
     flex-shrink: 0;
     width: 24px;
     height: 24px;
@@ -198,7 +198,7 @@ const problems = [
     transform: translate(-50%, -50%);
     width: 100%; height: 100%;
     border-radius: 50%;
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(168, 85, 247, 0.2);
     animation: alert-pulse 2s infinite;
   }
   
@@ -312,12 +312,14 @@ const problems = [
     let height = 0;
     let centerX = 0;
     let centerY = 0;
-    let radius = 0;
-    let angle = 0;
+    let maxRadius = 0;
     
     // Configurable dots (stores / targets)
-    const targets: {x: number, y: number, distance: number, targetAngle: number, alpha: number}[] = [];
-    const numTargets = 15;
+    const targets: {x: number, y: number, distance: number, alpha: number}[] = [];
+    const numTargets = 20;
+    
+    const waves: {radius: number}[] = [{radius: 0}];
+    let frame = 0;
     
     function resize() {
       width = canvas.parentElement?.clientWidth || window.innerWidth;
@@ -326,26 +328,21 @@ const problems = [
       canvas.height = height;
       centerX = width / 2;
       centerY = height / 2;
-      radius = Math.max(width, height) / 1.5;
+      maxRadius = Math.max(width, height);
       
       // Generate random targets
       targets.length = 0;
       for (let i = 0; i < numTargets; i++) {
         // Random point in circle
-        const r = Math.random() * (radius * 0.8);
+        const r = Math.random() * (maxRadius * 0.9);
         const theta = Math.random() * Math.PI * 2;
         const tx = centerX + r * Math.cos(theta);
         const ty = centerY + r * Math.sin(theta);
-        
-        // Calculate angle of target relative to center
-        let targetAngle = Math.atan2(ty - centerY, tx - centerX);
-        if (targetAngle < 0) targetAngle += Math.PI * 2;
         
         targets.push({
           x: tx,
           y: ty,
           distance: r,
-          targetAngle: targetAngle,
           alpha: 0
         });
       }
@@ -356,79 +353,84 @@ const problems = [
     
     function draw() {
       if (!ctx) return;
+      frame++;
       
-      // Clear with very slight fade for trail effect
-      ctx.fillStyle = 'rgba(2, 2, 3, 1)';
+      // Clear background perfectly (no trail needed for waves)
+      ctx.fillStyle = '#020203';
       ctx.fillRect(0, 0, width, height);
       
-      // Draw grid rings
-      ctx.lineWidth = 1;
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.1)';
-      for (let i = 1; i <= 5; i++) {
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, (radius / 5) * i, 0, Math.PI * 2);
-        ctx.stroke();
+      // Spawn new wave every 120 frames (approx 2s)
+      if (frame % 120 === 0) {
+        waves.push({radius: 0});
       }
       
-      // Draw crosshairs
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY - radius);
-      ctx.lineTo(centerX, centerY + radius);
-      ctx.moveTo(centerX - radius, centerY);
-      ctx.lineTo(centerX + radius, centerY);
-      ctx.stroke();
-      
-      // Draw sweeping radar
-      angle += 0.02;
-      if (angle >= Math.PI * 2) angle = 0;
-      
-      const sweepLength = 0.5; // arc length in radians
-      
-      // Radar gradient
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.arc(centerX, centerY, radius, angle - sweepLength, angle);
-      ctx.lineTo(centerX, centerY);
-      
-      const gradient = ctx.createConicGradient(angle, centerX, centerY);
-      gradient.addColorStop(0, 'rgba(16, 185, 129, 0)');
-      gradient.addColorStop(1, 'rgba(16, 185, 129, 0.4)');
-      
-      ctx.fillStyle = gradient;
-      ctx.fill();
-      
-      // Radar sweeping line
-      ctx.beginPath();
-      ctx.moveTo(centerX, centerY);
-      ctx.lineTo(centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius);
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.8)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      
-      // Draw targets (blips)
-      targets.forEach(t => {
-        // Check if radar just passed over target
-        // Angle goes from 0 to 2PI
-        let diff = angle - t.targetAngle;
-        if (diff < 0) diff += Math.PI * 2;
+      // Process and draw waves
+      for (let i = waves.length - 1; i >= 0; i--) {
+        const wave = waves[i];
+        wave.radius += 3.5; // Wave speed
         
-        if (diff >= 0 && diff < 0.1) {
-          t.alpha = 1; // Ping!
+        if (wave.radius > maxRadius) {
+          waves.splice(i, 1);
+          continue;
         }
         
+        // Calculate opacity based on size
+        const alpha = Math.max(0, 1 - (wave.radius / maxRadius));
+        
+        // Draw the expanding wave
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, wave.radius, 0, Math.PI * 2);
+        
+        // Inner gradient for the wave thickness
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = `rgba(168, 85, 247, ${alpha * 0.6})`;
+        ctx.stroke();
+        
+        // Ghost trailing wave
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, Math.max(0, wave.radius - 15), 0, Math.PI * 2);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = `rgba(168, 85, 247, ${alpha * 0.15})`;
+        ctx.stroke();
+        
+        // Check intersections with targets
+        targets.forEach(t => {
+          if (Math.abs(wave.radius - t.distance) < 4) {
+            t.alpha = 1; // Ping the target!
+          }
+        });
+      }
+      
+      // Draw targets
+      targets.forEach(t => {
+        // Always draw a very faint dot so the map doesn't look empty
+        ctx.beginPath();
+        ctx.arc(t.x, t.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(168, 85, 247, 0.15)`;
+        ctx.fill();
+        
+        // Draw the active ping
         if (t.alpha > 0) {
+          ctx.save();
+          // Glowing core
           ctx.beginPath();
-          ctx.arc(t.x, t.y, 4, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(16, 185, 129, ${t.alpha})`;
+          ctx.arc(t.x, t.y, 6, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${t.alpha})`;
+          ctx.shadowBlur = 15;
+          ctx.shadowColor = '#a855f7';
           ctx.fill();
           
-          // Outer ping ring
+          // Outer neon expanding ring
           ctx.beginPath();
-          ctx.arc(t.x, t.y, 4 + (1 - t.alpha) * 10, 0, Math.PI * 2);
-          ctx.strokeStyle = `rgba(16, 185, 129, ${t.alpha * 0.5})`;
+          const ringSize = 6 + (1 - t.alpha) * 25;
+          ctx.arc(t.x, t.y, ringSize, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(168, 85, 247, ${t.alpha})`;
+          ctx.lineWidth = 2;
           ctx.stroke();
           
-          t.alpha -= 0.015; // Fade out
+          ctx.restore();
+          
+          t.alpha -= 0.015; // Fade out speed
         }
       });
       
