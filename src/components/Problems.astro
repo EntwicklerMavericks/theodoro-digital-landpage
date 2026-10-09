@@ -28,10 +28,12 @@ const problems = [
 ---
 
 <section id="problemas" class="problems reveal">
-  <div class="scanner-line"></div>
+  <canvas id="radar-canvas" class="radar-bg"></canvas>
+  <div class="radar-overlay"></div>
+  
   <div class="container relative">
     <div class="section-header text-center">
-      <div class="badge-alert">IDENTIFICAÇÃO DE GARGALOS</div>
+      <div class="badge-alert">SCANNER DE MERCADO</div>
       <h2>O seu crescimento está sendo <span class="text-gradient">sabotado?</span></h2>
       <p>Empresas travam quando a tecnologia não acompanha a operação. Você se identifica com algum desses cenários?</p>
     </div>
@@ -75,29 +77,27 @@ const problems = [
 
 <style>
   .problems {
-    background-color: #030305;
+    background-color: #020203;
     position: relative;
     padding: 8rem 0;
     overflow: hidden;
   }
   
-  /* Radar Scanner Effect */
-  .scanner-line {
+  .radar-bg {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to bottom, transparent, rgba(168, 85, 247, 0.05), rgba(239, 68, 68, 0.1), transparent);
-    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
-    z-index: 1;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
     pointer-events: none;
-    animation: scan 8s linear infinite;
+    opacity: 0.8;
   }
   
-  @keyframes scan {
-    0% { transform: translateY(-150px); }
-    100% { transform: translateY(1200px); }
+  .radar-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, #020203 90%);
+    z-index: 1;
+    pointer-events: none;
   }
   
   .relative { position: relative; z-index: 2; }
@@ -105,20 +105,24 @@ const problems = [
   .badge-alert {
     display: inline-block;
     padding: 0.4rem 1rem;
-    background: rgba(239, 68, 68, 0.1);
-    color: #f87171;
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
     border-radius: 50px;
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     margin-bottom: 1.5rem;
-    border: 1px solid rgba(239, 68, 68, 0.3);
-    box-shadow: 0 0 15px rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
   }
   
   .section-header {
     margin-bottom: 5rem;
     text-align: center;
+  }
+  
+  .section-header h2 {
+    font-size: 3rem;
   }
   
   .section-header p {
@@ -134,10 +138,9 @@ const problems = [
     margin-bottom: 2rem;
   }
   
-  /* Cyber Vulnerability Cards */
   .problem-card {
-    background-color: rgba(10, 10, 15, 0.8);
-    backdrop-filter: blur(10px);
+    background-color: rgba(10, 10, 15, 0.7);
+    backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 2rem;
@@ -158,13 +161,13 @@ const problems = [
   
   .problem-card:hover {
     transform: translateY(-5px);
-    border-color: rgba(239, 68, 68, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(239, 68, 68, 0.05);
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.05);
   }
   
   .problem-card:hover::before {
-    background: #ef4444;
-    box-shadow: 0 0 10px #ef4444;
+    background: #10b981;
+    box-shadow: 0 0 10px #10b981;
   }
   
   .card-glitch-layer {
@@ -183,7 +186,7 @@ const problems = [
   
   .icon-wrapper {
     position: relative;
-    color: #ef4444;
+    color: #10b981;
     flex-shrink: 0;
     width: 24px;
     height: 24px;
@@ -195,7 +198,7 @@ const problems = [
     transform: translate(-50%, -50%);
     width: 100%; height: 100%;
     border-radius: 50%;
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(16, 185, 129, 0.2);
     animation: alert-pulse 2s infinite;
   }
   
@@ -216,15 +219,14 @@ const problems = [
     line-height: 1.6;
   }
   
-  /* PREMIUM BANNER */
   .premium-cta-banner {
     position: relative;
-    margin-top: 4rem;
+    margin-top: 5rem;
     border-radius: 24px;
-    padding: 1px; /* Thin gradient border */
+    padding: 1px;
     background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.01) 100%);
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
   }
   
   .banner-glow {
@@ -262,7 +264,7 @@ const problems = [
   .banner-content h3 {
     font-size: 2.2rem;
     margin-bottom: 1rem;
-    background: linear-gradient(to right, #ffffff, var(--color-lavender-neon));
+    background: linear-gradient(to right, #ffffff, #c084fc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.02em;
@@ -270,7 +272,7 @@ const problems = [
   
   .banner-content p {
     font-size: 1.1rem;
-    color: var(--color-text-secondary);
+    color: #94a3b8;
     max-width: 600px;
     margin-bottom: 2.5rem;
     line-height: 1.6;
@@ -287,28 +289,152 @@ const problems = [
   .pulse-btn::after {
     content: '';
     position: absolute;
-    top: 0; 
-    left: -100%;
-    width: 100%; 
-    height: 100%;
+    top: 0; left: -100%; width: 100%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
     transition: left 0.7s ease;
   }
   
-  .pulse-btn:hover::after {
-    left: 100%;
-  }
-  
-  .pulse-btn svg {
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-  
-  .pulse-btn:hover svg {
-    transform: translateX(6px);
-  }
+  .pulse-btn:hover::after { left: 100%; }
+  .pulse-btn svg { transition: transform 0.3s ease; }
+  .pulse-btn:hover svg { transform: translateX(6px); }
 
   @media (max-width: 768px) {
     .banner-content { padding: 3rem 1.5rem; }
     .banner-content h3 { font-size: 1.8rem; }
   }
 </style>
+
+<script>
+  const canvas = document.getElementById('radar-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = 0;
+    let height = 0;
+    let centerX = 0;
+    let centerY = 0;
+    let radius = 0;
+    let angle = 0;
+    
+    // Configurable dots (stores / targets)
+    const targets: {x: number, y: number, distance: number, targetAngle: number, alpha: number}[] = [];
+    const numTargets = 15;
+    
+    function resize() {
+      width = canvas.parentElement?.clientWidth || window.innerWidth;
+      height = canvas.parentElement?.clientHeight || window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+      centerX = width / 2;
+      centerY = height / 2;
+      radius = Math.max(width, height) / 1.5;
+      
+      // Generate random targets
+      targets.length = 0;
+      for (let i = 0; i < numTargets; i++) {
+        // Random point in circle
+        const r = Math.random() * (radius * 0.8);
+        const theta = Math.random() * Math.PI * 2;
+        const tx = centerX + r * Math.cos(theta);
+        const ty = centerY + r * Math.sin(theta);
+        
+        // Calculate angle of target relative to center
+        let targetAngle = Math.atan2(ty - centerY, tx - centerX);
+        if (targetAngle < 0) targetAngle += Math.PI * 2;
+        
+        targets.push({
+          x: tx,
+          y: ty,
+          distance: r,
+          targetAngle: targetAngle,
+          alpha: 0
+        });
+      }
+    }
+    
+    window.addEventListener('resize', resize);
+    resize();
+    
+    function draw() {
+      if (!ctx) return;
+      
+      // Clear with very slight fade for trail effect
+      ctx.fillStyle = 'rgba(2, 2, 3, 1)';
+      ctx.fillRect(0, 0, width, height);
+      
+      // Draw grid rings
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.1)';
+      for (let i = 1; i <= 5; i++) {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, (radius / 5) * i, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+      
+      // Draw crosshairs
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY - radius);
+      ctx.lineTo(centerX, centerY + radius);
+      ctx.moveTo(centerX - radius, centerY);
+      ctx.lineTo(centerX + radius, centerY);
+      ctx.stroke();
+      
+      // Draw sweeping radar
+      angle += 0.02;
+      if (angle >= Math.PI * 2) angle = 0;
+      
+      const sweepLength = 0.5; // arc length in radians
+      
+      // Radar gradient
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.arc(centerX, centerY, radius, angle - sweepLength, angle);
+      ctx.lineTo(centerX, centerY);
+      
+      const gradient = ctx.createConicGradient(angle, centerX, centerY);
+      gradient.addColorStop(0, 'rgba(16, 185, 129, 0)');
+      gradient.addColorStop(1, 'rgba(16, 185, 129, 0.4)');
+      
+      ctx.fillStyle = gradient;
+      ctx.fill();
+      
+      // Radar sweeping line
+      ctx.beginPath();
+      ctx.moveTo(centerX, centerY);
+      ctx.lineTo(centerX + Math.cos(angle) * radius, centerY + Math.sin(angle) * radius);
+      ctx.strokeStyle = 'rgba(16, 185, 129, 0.8)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      
+      // Draw targets (blips)
+      targets.forEach(t => {
+        // Check if radar just passed over target
+        // Angle goes from 0 to 2PI
+        let diff = angle - t.targetAngle;
+        if (diff < 0) diff += Math.PI * 2;
+        
+        if (diff >= 0 && diff < 0.1) {
+          t.alpha = 1; // Ping!
+        }
+        
+        if (t.alpha > 0) {
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, 4, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(16, 185, 129, ${t.alpha})`;
+          ctx.fill();
+          
+          // Outer ping ring
+          ctx.beginPath();
+          ctx.arc(t.x, t.y, 4 + (1 - t.alpha) * 10, 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(16, 185, 129, ${t.alpha * 0.5})`;
+          ctx.stroke();
+          
+          t.alpha -= 0.015; // Fade out
+        }
+      });
+      
+      requestAnimationFrame(draw);
+    }
+    
+    draw();
+  }
+</script>
