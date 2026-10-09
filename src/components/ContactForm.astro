@@ -11,7 +11,7 @@ import { config } from '../data/config';
         
         <div class="direct-contact">
           <p>Prefere chamar direto?</p>
-          <a href={`https://wa.me/${config.contact.whatsapp}`} target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <a href={`https://wa.me/${config.contact.whatsappDirect}?text=${encodeURIComponent("Olá! Vim pelo site da Theodoro Digital e gostaria de conversar.")}`} target="_blank" rel="noopener noreferrer" class="btn-secondary">
             Falar diretamente pelo WhatsApp
           </a>
         </div>
@@ -60,7 +60,7 @@ import { config } from '../data/config';
             <textarea id="description" name="description" rows="4" placeholder="Conte-nos um pouco sobre o seu projeto..."></textarea>
           </div>
           
-          <button type="submit" class="btn-primary btn-block" data-wa={config.contact.whatsapp}>
+          <button type="submit" class="btn-primary btn-block" data-wa={config.contact.whatsappForm}>
             Solicitar orçamento pelo WhatsApp
           </button>
         </form>

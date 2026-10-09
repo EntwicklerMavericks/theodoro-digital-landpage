@@ -1,12 +1,15 @@
 export const config = {
   brandName: "Theodoro Digital",
   contact: {
-    whatsapp: "5511999999999", // TODO: REPLACE WITH REAL NUMBER (apenas números com DDD)
-    email: "contato@theodorodigital.com", // TODO: REPLACE WITH REAL EMAIL
+    whatsappForm: "5511963041542", // Envio do formulário
+    whatsappDirect: "5511961742713", // Contato direto
+    whatsapp: "5511963041542",
+    email: "contato@theodorodigital.com",
   },
   socials: {
-    linkedin: "https://linkedin.com/in/seu-perfil", // TODO: REPLACE
-    github: "https://github.com/seu-usuario", // TODO: REPLACE
+    linkedin: "https://www.linkedin.com/in/eduardot97",
+    github: "https://github.com/EntwicklerMavericks?tab=repositories",
+    instagram: "#",
   },
   seo: {
     title: "Theodoro Digital | Soluções Tecnológicas sob Medida",
