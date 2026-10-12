@@ -46,11 +46,23 @@
               <div class="line output success" id="term-line-init" data-i18n="about.terminalInit">TheodoroOS v2.0.4 - Sistema Inicializado</div>
               <div class="line output" id="term-line-help" data-i18n="about.terminalHelpPrompt">Digite 'ajuda' ou 'help' para ver os comandos disponíveis. Clique aqui para digitar.</div>
             </div>
-            <div class="terminal-input-line">
+            <form class="terminal-input-line" id="terminal-form" onsubmit="return false;">
               <span class="prompt" id="term-prompt" data-i18n="about.terminalPromptUser">visitante@theodoro:~$</span> 
-              <span id="terminal-current-input"></span><div class="cursor"></div>
-            </div>
-            <input type="text" id="terminal-hidden-input" autocomplete="off" spellcheck="false" />
+              <div class="terminal-input-wrapper">
+                <input
+                  type="text"
+                  id="terminal-input"
+                  class="terminal-real-input"
+                  autocomplete="off"
+                  autocorrect="off"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  enterkeyhint="send"
+                  aria-label="Terminal command input"
+                />
+                <span class="cursor" id="terminal-block-cursor"></span>
+              </div>
+            </form>
           </div>
         </div>
         
@@ -233,10 +245,11 @@
   
   .line {
     margin-bottom: 0.2rem;
-    word-break: break-all;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
   
-  .prompt { color: #a855f7; font-weight: bold; margin-right: 8px; }
+  .prompt { color: #a855f7; font-weight: bold; margin-right: 8px; flex-shrink: 0; }
   .cmd { color: #fff; }
   .output { color: #94a3b8; }
   .output.success { color: #10b981; }
@@ -246,29 +259,46 @@
   .terminal-input-line {
     display: flex;
     align-items: center;
+    width: 100%;
   }
-  
-  #terminal-current-input {
+
+  .terminal-input-wrapper {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .terminal-real-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
     color: #fff;
-    white-space: pre;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: inherit;
+    line-height: inherit;
+    caret-color: #a855f7;
+    padding: 0;
+    margin: 0;
   }
   
   .cursor {
+    position: absolute;
+    left: 0;
+    pointer-events: none;
     display: inline-block;
     width: 8px;
     height: 18px;
     background: #a855f7;
     animation: blink 1s step-end infinite;
-    margin-left: 2px;
     vertical-align: middle;
   }
-  
-  #terminal-hidden-input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-    width: 1px;
-    height: 1px;
+
+  .terminal-real-input:focus + .cursor,
+  .terminal-real-input.has-value + .cursor {
+    display: none;
   }
   
   @keyframes blink {
@@ -339,12 +369,12 @@
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     const terminal = document.getElementById('interactive-terminal');
-    const hiddenInput = document.getElementById('terminal-hidden-input');
-    const currentInputDisplay = document.getElementById('terminal-current-input');
+    const terminalForm = document.getElementById('terminal-form');
+    const terminalInput = document.getElementById('terminal-input');
     const outputArea = document.getElementById('terminal-output');
     const promptDisplay = document.getElementById('term-prompt');
     
-    if (!terminal || !hiddenInput || !currentInputDisplay || !outputArea) return;
+    if (!terminal || !terminalForm || !terminalInput || !outputArea) return;
 
     let currentLang = 'pt';
     try {
@@ -360,30 +390,42 @@
       }
     });
 
-    terminal.addEventListener('click', () => {
-      hiddenInput.focus();
+    terminal.addEventListener('click', (e) => {
+      if (e.target && e.target.tagName === 'A') return;
+      if (window.getSelection && window.getSelection().toString()) return;
+      terminalInput.focus();
     });
 
-    hiddenInput.addEventListener('input', (e) => {
-      currentInputDisplay.textContent = e.target.value;
+    terminalInput.addEventListener('input', () => {
+      terminalInput.classList.toggle('has-value', terminalInput.value.length > 0);
       terminal.scrollTop = terminal.scrollHeight;
     });
 
-    hiddenInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        const cmd = hiddenInput.value.trim();
-        const pText = promptDisplay ? promptDisplay.textContent : 'visitante@theodoro:~$';
-        
-        const cmdLine = document.createElement('div');
-        cmdLine.className = 'line';
-        cmdLine.innerHTML = `<span class="prompt">${pText}</span> <span class="cmd">${cmd}</span>`;
-        outputArea.appendChild(cmdLine);
-        
-        executeCommand(cmd.toLowerCase());
-        
-        hiddenInput.value = '';
-        currentInputDisplay.textContent = '';
-        terminal.scrollTop = terminal.scrollHeight;
+    function submitCommand() {
+      const cmd = terminalInput.value.trim();
+      const pText = promptDisplay ? promptDisplay.textContent : 'visitante@theodoro:~$';
+      
+      const cmdLine = document.createElement('div');
+      cmdLine.className = 'line';
+      cmdLine.innerHTML = `<span class="prompt">${pText}</span> <span class="cmd">${cmd}</span>`;
+      outputArea.appendChild(cmdLine);
+      
+      executeCommand(cmd.toLowerCase());
+      
+      terminalInput.value = '';
+      terminalInput.classList.remove('has-value');
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    terminalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitCommand();
+    });
+
+    terminalInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.keyCode === 13) {
+        e.preventDefault();
+        submitCommand();
       }
     });
     
