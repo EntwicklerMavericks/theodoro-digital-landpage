@@ -11,8 +11,8 @@
   --color-border-highlight: rgba(168, 85, 247, 0.3);
   
   --font-main: 'Inter', sans-serif;
-  --spacing-section: 8rem;
-  --spacing-container: 2rem;
+  --spacing-section: clamp(4.5rem, 8vw, 8rem);
+  --spacing-container: clamp(1.2rem, 3vw, 2rem);
   
   --max-width: 1140px;
 }
