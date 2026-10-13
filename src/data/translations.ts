@@ -10,7 +10,7 @@ export const translations = {
     },
     hero: {
       badge: "DESENVOLVIMENTO • DESIGN • TECNOLOGIA",
-      headline: "Tecnologia sob medida para <br/><span class='gradient-text animated-gradient'>impulsionar seu negócio.</span>",
+      headline: "<span class='sr-only'>Theodoro Digital — Desenvolvimento Web e </span>Tecnologia sob medida para <br/><span class='gradient-text animated-gradient'>impulsionar seu negócio.</span>",
       description: "Crio sites, landing pages e sistemas personalizados para transformar suas ideias em soluções digitais eficientes, profissionais e preparadas para crescer com sua empresa.",
       cta: "Vamos tirar seu projeto do papel?",
       explore: "Explore"
@@ -210,7 +210,7 @@ export const translations = {
     },
     hero: {
       badge: "DEVELOPMENT • DESIGN • TECHNOLOGY",
-      headline: "Bespoke technology to <br/><span class='gradient-text animated-gradient'>power your business growth.</span>",
+      headline: "<span class='sr-only'>Theodoro Digital — Web Development & </span>Bespoke technology to <br/><span class='gradient-text animated-gradient'>power your business growth.</span>",
       description: "I build custom websites, high-converting landing pages, and systems to transform your ideas into efficient, professional digital solutions ready to scale with your business.",
       cta: "Let's bring your project to life",
       explore: "Explore"
@@ -410,7 +410,7 @@ export const translations = {
     },
     hero: {
       badge: "DESARROLLO • DISEÑO • TECNOLOGÍA",
-      headline: "Tecnología a medida para <br/><span class='gradient-text animated-gradient'>impulsar su negocio.</span>",
+      headline: "<span class='sr-only'>Theodoro Digital — Desarrollo Web y </span>Tecnología a medida para <br/><span class='gradient-text animated-gradient'>impulsar su negocio.</span>",
       description: "Creo sitios web, landing pages y sistemas personalizados para transformar sus ideas en soluciones digitales eficientes, profesionales y preparadas para crecer con su empresa.",
       cta: "¿Hacemos realidad su proyecto?",
       explore: "Explorar"

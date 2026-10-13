@@ -12,8 +12,10 @@ export const config = {
     instagram: "#",
   },
   seo: {
-    title: "Theodoro Digital | Soluções Tecnológicas sob Medida",
-    description: "Desenvolvimento de sites, sistemas, automações e produtos digitais para impulsionar o seu negócio.",
+    title: "Theodoro Digital | Desenvolvimento Web e Soluções Digitais",
+    description: "Criação de landing pages de alta conversão, software sob medida e tecnologia para impulsionar seu negócio. Conheça as soluções da Theodoro Digital.",
+    canonical: "https://theodorodigital.com/",
+    ogImage: "https://theodorodigital.com/banner-og.png",
   },
   products: {
     nexa: {
